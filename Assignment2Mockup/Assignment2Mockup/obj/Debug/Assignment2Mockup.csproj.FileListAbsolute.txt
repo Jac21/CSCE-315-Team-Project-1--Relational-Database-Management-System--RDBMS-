@@ -1,0 +1,15 @@
+H:\CSCE315\Assignment2Mockup\Assignment2Mockup\Assignment2Mockup\bin\Debug\Assignment2Mockup.exe.config
+H:\CSCE315\Assignment2Mockup\Assignment2Mockup\Assignment2Mockup\bin\Debug\Assignment2Mockup.exe
+H:\CSCE315\Assignment2Mockup\Assignment2Mockup\Assignment2Mockup\bin\Debug\Assignment2Mockup.pdb
+H:\CSCE315\Assignment2Mockup\Assignment2Mockup\Assignment2Mockup\obj\Debug\Assignment2Mockup.csprojResolveAssemblyReference.cache
+H:\CSCE315\Assignment2Mockup\Assignment2Mockup\Assignment2Mockup\obj\Debug\Assignment2Mockup.exe
+H:\CSCE315\Assignment2Mockup\Assignment2Mockup\Assignment2Mockup\obj\Debug\Assignment2Mockup.pdb
+Z:\CSCE315\Assignment2Mockup\Assignment2Mockup\Assignment2Mockup\bin\Debug\Assignment2Mockup.exe.config
+Z:\CSCE315\Assignment2Mockup\Assignment2Mockup\Assignment2Mockup\obj\Debug\Assignment2Mockup.exe
+Z:\CSCE315\Assignment2Mockup\Assignment2Mockup\Assignment2Mockup\obj\Debug\Assignment2Mockup.pdb
+Z:\CSCE315\Assignment2Mockup\Assignment2Mockup\Assignment2Mockup\bin\Debug\Assignment2Mockup.exe
+Z:\CSCE315\Assignment2Mockup\Assignment2Mockup\Assignment2Mockup\bin\Debug\Assignment2Mockup.pdb
+Z:\CSCE315\Assignment2Mockup\Assignment2Mockup\Assignment2Mockup\obj\Debug\Assignment2Mockup.csprojResolveAssemblyReference.cache
+C:\Users\Jac21ASUS\Desktop\Assignment2Mockup\Assignment2Mockup\bin\Debug\Assignment2Mockup.exe.config
+C:\Users\Jac21ASUS\Desktop\Assignment2Mockup\Assignment2Mockup\obj\Debug\Assignment2Mockup.exe
+C:\Users\Jac21ASUS\Desktop\Assignment2Mockup\Assignment2Mockup\obj\Debug\Assignment2Mockup.pdb
