@@ -127,7 +127,7 @@ public:
 		{
 			Columns[i].Rows.erase(Columns[i].Rows.begin() + Row);
 		}
-		cout<<"Row " << Row << " removed\n";
+		cout<<"Row " << Row + 1 << " removed\n";
 	}
 
 	void Print()
