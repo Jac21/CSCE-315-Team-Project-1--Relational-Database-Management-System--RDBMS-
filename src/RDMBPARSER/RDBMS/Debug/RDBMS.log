@@ -1,0 +1,54 @@
+﻿Build started 2/17/2014 10:43:36 PM.
+     1>Project "C:\Users\Jac21ASUS\Desktop\RDMBPARSER\RDBMS\RDBMS.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Database.cpp
+         Database.cpp
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(15): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(29): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(33): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(35): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(56): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(58): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(69): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(84): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(86): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(87): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(104): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(121): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(126): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(145): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(147): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(158): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(166): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(194): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(203): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(214): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(219): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(230): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(232): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(234): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(246): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(261): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(268): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(269): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(271): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(278): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(279): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(293): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(299): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(300): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(302): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\desktop\rdmbparser\rdbms\database.cpp(117): warning C4715: 'Database::setDifference' : not all control paths return a value
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Jac21ASUS\Desktop\RDMBPARSER\Debug\RDBMS.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Jac21ASUS\Desktop\RDMBPARSER\Debug\RDBMS.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Jac21ASUS\Desktop\RDMBPARSER\Debug\RDBMS.lib" /MACHINE:X86 Debug\Condition.obj
+         Debug\Database.obj
+         Debug\Parser.obj
+         Debug\Relation.obj
+         Debug\TESTS.obj
+         Debug\stdafx.obj
+         RDBMS.vcxproj -> C:\Users\Jac21ASUS\Desktop\RDMBPARSER\Debug\RDBMS.exe
+     1>Done Building Project "C:\Users\Jac21ASUS\Desktop\RDMBPARSER\RDBMS\RDBMS.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.12
