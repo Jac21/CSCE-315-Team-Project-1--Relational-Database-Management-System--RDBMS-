@@ -18,7 +18,7 @@ public:
    // seven necessary operations 
 	_Relation* getRelation(string Name);
    _Relation selection(Condition& c, _Relation r);
-   _Relation projection(vector<_Column> attributes, _Relation r);
+   _Relation projection(vector<String> attributes, _Relation r);
    void renaming(vector<String> renames, _Relation& r);
    _Relation setUnion(_Relation a, _Relation b);
    _Relation setDifference(_Relation& a, _Relation& b);
@@ -33,6 +33,9 @@ public:
    void update(String rName, vector<String> attributes, vector<_Data> newValues, Condition& c); 
    void deleteFrom(String name, Condition& c);
    void show(String name);
+   void addRelation(_Relation& r) { allRelations.push_back(r); } // end function 
+
+
 
    
 }; // end class Database

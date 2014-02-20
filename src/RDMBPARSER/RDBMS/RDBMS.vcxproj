@@ -64,6 +64,7 @@
   <ItemGroup>
     <ClInclude Include="Condition.h" />
     <ClInclude Include="Database.h" />
+    <ClInclude Include="Parser_Redux.h" />
     <ClInclude Include="Relation.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="std_lib_facilities.h" />

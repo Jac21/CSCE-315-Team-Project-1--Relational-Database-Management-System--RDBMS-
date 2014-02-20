@@ -12,9 +12,9 @@
 
 _Relation* Database::getRelation(string Name)
 {
-	for(int i = 0; i < allRelations.size();i++)
-		if(allRelations[i].Name == Name)
-			return &allRelations[i];
+	for (int i = 0; i < allRelations.size(); i++)
+	if (allRelations[i].Name == Name)
+		return &allRelations[i];
 	return NULL;
 }
 
@@ -23,7 +23,7 @@ _Relation Database::selection(Condition& c, _Relation r) {
 	return r2;
 }
 
-_Relation Database::projection(vector<_Column> attributes, _Relation r) {
+_Relation Database::projection(vector<String> attributes, _Relation r) {
 
 	vector<_Column> rAttributes;
 	for (int i = 0; i < r.Columns.size(); ++i)
@@ -34,7 +34,7 @@ _Relation Database::projection(vector<_Column> attributes, _Relation r) {
 
 		for (int j = 0; j < attributes.size(); j++) {
 
-			if (attributes[i].Name == rAttributes[j].Name) {
+			if (attributes[i] == rAttributes[j].Name) {
 
 				newRelation.AddColumn(r.Columns[j]);
 
@@ -53,9 +53,9 @@ _Relation Database::projection(vector<_Column> attributes, _Relation r) {
 _Relation Database::setDifference(_Relation& a, _Relation& b) {
 	vector<_Column> aAttributes;
 	vector<_Column> bAttributes;
-	for(int i = 0; i<a.Columns.size(); ++i) 
+	for (int i = 0; i<a.Columns.size(); ++i)
 		aAttributes.push_back(a.Columns[i]);
-	for(int i=0; i<b.Columns.size(); ++i)
+	for (int i = 0; i<b.Columns.size(); ++i)
 		bAttributes.push_back(b.Columns[i]);
 	_Relation newRelation("sudo");
 	bool okAdd = false;
@@ -84,7 +84,7 @@ _Relation Database::setDifference(_Relation& a, _Relation& b) {
 	for (int j = 0; j < aAttributes[0].Rows.size(); j++) {
 
 		for (int k = 0; k < bAttributes[0].Rows.size(); k++) {
-			for(int z = 0; z<aAttributes.size(); ++z) {
+			for (int z = 0; z<aAttributes.size(); ++z) {
 				if (aAttributes[z].Rows[j].Data != bAttributes[z].Rows[j].Data) {
 
 					okAdd = true;
@@ -101,7 +101,7 @@ _Relation Database::setDifference(_Relation& a, _Relation& b) {
 
 		if (okAdd == true) {
 			vector<_Data> dt;
-			for(int i=0; i<aAttributes.size(); ++i) {
+			for (int i = 0; i<aAttributes.size(); ++i) {
 				dt.push_back(aAttributes[i].Get_Data(j));
 				newRelation.AddRow(dt);
 
@@ -138,13 +138,13 @@ void Database::renaming(vector<String> renames, _Relation& r) {
 
 } // end renaming(vector<string>, Relation&)
 
-_Relation Database::setUnion(_Relation a, _Relation b) 
+_Relation Database::setUnion(_Relation a, _Relation b)
 {
 	vector<_Column> aAttributes;
 	vector<_Column> bAttributes;
-	for(int i = 0; i<a.Columns.size(); ++i) 
+	for (int i = 0; i<a.Columns.size(); ++i)
 		aAttributes.push_back(a.Columns[i]);
-	for(int i=0; i<b.Columns.size(); ++i)
+	for (int i = 0; i<b.Columns.size(); ++i)
 		bAttributes.push_back(b.Columns[i]);
 	_Relation newRelation("sudo");
 	vector<_Column> newAttribute;
@@ -185,7 +185,20 @@ _Relation Database::setUnion(_Relation a, _Relation b)
 
 // Cross Products definition should go here
 
+_Relation Database::crossProduct(_Relation& c, _Relation& k)
+{
+	_Relation p("fuasdfasdfk");
+	return p;
+}
+
+
 // Natural Joins definition should go here
+
+_Relation Database::naturalJoin(_Relation& c, _Relation& k)
+{
+	_Relation p("fasdfasdf");
+	return p;
+}
 
 /* Function that cretes a relation
 ...with the specified name, attributes, and keys */
@@ -200,8 +213,8 @@ void Database::createTable(String name, Vector<_Column> attributes) {
 /* Deletes the relation from the database
 ..with the same name as Relation r */
 void Database::dropTable(_Relation r) {
-	for(int i=0; i < allRelations.size(); ++i) {
-		if(allRelations[i].GetName() == r.GetName()) {
+	for (int i = 0; i < allRelations.size(); ++i) {
+		if (allRelations[i].GetName() == r.GetName()) {
 			allRelations.erase(allRelations.begin() + i);
 		}
 	}
@@ -216,8 +229,8 @@ void Database::insertInto(String name, Vector<String> literals) {
 		d.push_back(i);
 	}
 
-	for(int i=0; i < allRelations.size(); ++i) {
-		if(allRelations[i].GetName() == name) {
+	for (int i = 0; i < allRelations.size(); ++i) {
+		if (allRelations[i].GetName() == name) {
 			allRelations[i].AddRow(d);
 		}
 	}
@@ -227,9 +240,9 @@ void Database::insertInto(String name, Vector<String> literals) {
 ...Takes the relation and adds it to the relation
 ...with the given name.							    */
 void Database::insertInto(String name, _Relation& r) {
-	for(int i=0; i<allRelations.size(); ++i) {
-		if(allRelations[i].GetName() == name) {
-			for(int i=0; i<r.Columns.size(); ++i) {
+	for (int i = 0; i<allRelations.size(); ++i) {
+		if (allRelations[i].GetName() == name) {
+			for (int i = 0; i<r.Columns.size(); ++i) {
 				vector<_Data> d;
 				for (int j = 0; j < r.Columns[i].Rows.size(); ++j) {
 					d.push_back(r.GetRow(i, j));
@@ -237,7 +250,7 @@ void Database::insertInto(String name, _Relation& r) {
 				allRelations[i].AddRow(d);
 			}
 		}
-	}		
+	}
 }
 
 // Outputs the Relation with the matching Name
@@ -257,27 +270,27 @@ void Database::show(String name) {
 ...With its new value						*/
 void Database::update(String rname, vector<String> attributes, vector<_Data> newvalues, Condition& c)
 {
-	int indr= 0;
-	for(indr = 0; indr < allRelations.size(); ++indr)
+	int indr = 0;
+	for (indr = 0; indr < allRelations.size(); ++indr)
 	{
-		if(allRelations[indr].GetName() == rname) 
+		if (allRelations[indr].GetName() == rname)
 			break;
 	}
 
 	_Relation r2 = c.evaluate(&allRelations[indr]);
-	for(int i = 0; i<r2.Columns[0].Rows.size(); ++i) {
-		for(int j=0; j<allRelations[indr].Columns[0].Rows.size(); ++j) {
+	for (int i = 0; i<r2.Columns[0].Rows.size(); ++i) {
+		for (int j = 0; j<allRelations[indr].Columns[0].Rows.size(); ++j) {
 			bool upd = true;
-			for(int k=0; k<allRelations[indr].Columns.size(); ++i) {
+			for (int k = 0; k<allRelations[indr].Columns.size(); ++i) {
 				if (r2.Columns[k].Rows[i].Data != allRelations[indr].Columns[k].Rows[j].Data) {
 					upd = false;
 					break;
 				}
 			}
-			if(upd == true) {
-				for(int y=0; y<attributes.size(); ++y) {
-					for(int z=0; z<allRelations[indr].Columns.size(); ++z) {
-						if(attributes[y] == allRelations[indr].Columns[z].Name) {
+			if (upd == true) {
+				for (int y = 0; y<attributes.size(); ++y) {
+					for (int z = 0; z<allRelations[indr].Columns.size(); ++z) {
+						if (attributes[y] == allRelations[indr].Columns[z].Name) {
 							allRelations[indr].Columns[z].Rows[j] = newvalues[y];
 						}
 					}

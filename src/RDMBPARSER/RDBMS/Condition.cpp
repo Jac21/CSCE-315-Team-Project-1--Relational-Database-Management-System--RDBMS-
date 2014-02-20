@@ -1,10 +1,10 @@
 #include "Condition.h"
 
 /*--------------------------|
-	Author: Jeffrey LeRoy   |
-	Group: Team C           |
-	RDBMS Project			|
-	Last Edited 2/10/14		|
+Author: Jeffrey LeRoy   |
+Group: Team C           |
+RDBMS Project			|
+Last Edited 2/10/14		|
 ---------------------------*/
 
 /* --- FUNCTIONS/METHODS -- */
