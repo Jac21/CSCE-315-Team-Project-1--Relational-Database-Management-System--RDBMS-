@@ -1,42 +1,13 @@
-﻿Build started 2/21/2014 1:50:08 PM.
+﻿Build started 2/21/2014 2:56:25 PM.
      1>Project "C:\Users\csauers\Source\Repos\Assignment2Git\src\RDMBPARSER\RDBMS\RDBMS.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Parser.cpp
-         Parser.cpp
-     1>c:\users\csauers\source\repos\assignment2git\src\rdmbparser\rdbms\parser.cpp(220): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\csauers\source\repos\assignment2git\src\rdmbparser\rdbms\parser.cpp(234): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\csauers\source\repos\assignment2git\src\rdmbparser\rdbms\parser.cpp(239): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\csauers\source\repos\assignment2git\src\rdmbparser\rdbms\parser.cpp(242): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\csauers\source\repos\assignment2git\src\rdmbparser\rdbms\parser.cpp(255): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\csauers\source\repos\assignment2git\src\rdmbparser\rdbms\parser.cpp(360): warning C4129: ',' : unrecognized character escape sequence
-     1>c:\users\csauers\source\repos\assignment2git\src\rdmbparser\rdbms\parser.cpp(383): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\csauers\source\repos\assignment2git\src\rdmbparser\rdbms\parser.cpp(385): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\csauers\source\repos\assignment2git\src\rdmbparser\rdbms\parser.cpp(389): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\csauers\source\repos\assignment2git\src\rdmbparser\rdbms\parser.cpp(458): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\csauers\source\repos\assignment2git\src\rdmbparser\rdbms\parser.cpp(480): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\csauers\source\repos\assignment2git\src\rdmbparser\rdbms\parser.cpp(516): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\csauers\source\repos\assignment2git\src\rdmbparser\rdbms\parser.cpp(550): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\csauers\source\repos\assignment2git\src\rdmbparser\rdbms\parser.cpp(560): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\csauers\source\repos\assignment2git\src\rdmbparser\rdbms\parser.cpp(697): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\csauers\source\repos\assignment2git\src\rdmbparser\rdbms\parser.cpp(736): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\csauers\source\repos\assignment2git\src\rdmbparser\rdbms\parser.cpp(893): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\csauers\source\repos\assignment2git\src\rdmbparser\rdbms\parser.cpp(952): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\csauers\source\repos\assignment2git\src\rdmbparser\rdbms\parser.cpp(1007): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\csauers\source\repos\assignment2git\src\rdmbparser\rdbms\parser.cpp(1040): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\csauers\source\repos\assignment2git\src\rdmbparser\rdbms\parser.cpp(1105): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\csauers\source\repos\assignment2git\src\rdmbparser\rdbms\parser.cpp(1137): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\csauers\source\repos\assignment2git\src\rdmbparser\rdbms\parser.cpp(1202): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\csauers\source\repos\assignment2git\src\rdmbparser\rdbms\parser.cpp(1234): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\csauers\source\repos\assignment2git\src\rdmbparser\rdbms\parser.cpp(1318): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\csauers\source\repos\assignment2git\src\rdmbparser\rdbms\parser.cpp(689): warning C4715: 'GrabColumn' : not all control paths return a value
-     1>c:\users\csauers\source\repos\assignment2git\src\rdmbparser\rdbms\parser.cpp(1359): warning C4715: 'NaturalJoin::Execute' : not all control paths return a value
-     1>c:\users\csauers\source\repos\assignment2git\src\rdmbparser\rdbms\parser_redux.h(16): warning C4715: 'Query::IsQuery' : not all control paths return a value
-     1>c:\users\csauers\source\repos\assignment2git\src\rdmbparser\rdbms\parser.cpp(565): warning C4715: 'GrabToken' : not all control paths return a value
-     1>c:\users\csauers\source\repos\assignment2git\src\rdmbparser\rdbms\parser.cpp(31): warning C4715: 'Command::IsCommand' : not all control paths return a value
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt PizzaMain.cpp
+         PizzaMain.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\csauers\Source\Repos\Assignment2Git\src\RDMBPARSER\Debug\RDBMS.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\csauers\Source\Repos\Assignment2Git\src\RDMBPARSER\Debug\RDBMS.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\csauers\Source\Repos\Assignment2Git\src\RDMBPARSER\Debug\RDBMS.lib" /MACHINE:X86 Debug\Condition.obj
          Debug\Database.obj
          Debug\Parser.obj
+         Debug\PizzaMain.obj
          Debug\Relation.obj
          Debug\TESTS.obj
          Debug\stdafx.obj
@@ -45,4 +16,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.96
+Time Elapsed 00:00:00.78

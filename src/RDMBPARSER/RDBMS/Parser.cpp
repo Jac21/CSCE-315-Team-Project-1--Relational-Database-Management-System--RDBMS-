@@ -1353,27 +1353,3 @@ bool NaturalJoin::Execute(Database* DB, string input) {
 
 } // end Execute(Database*, string)
 
-
-int main()
-{
-	Database DB;
-	vector<_Column> Columns;
-	Columns.push_back(_Column("ID", true, _Type::INT));
-	Columns.push_back(_Column("Name", false, _Type::VARCHAR));
-	Columns.push_back(_Column("Pet", false, _Type::VARCHAR));
-	Columns.push_back(_Column("Age", false, _Type::INT));
-	DB.createTable("animals", Columns);
-	Parser P(&DB);
-
-
-	P.Execute("CREATE TABLE animals (ID INTEGER, Name VARCHAR(20), PET VARCHAR(20), Age INTEGER)");
-	P.Execute("INSERT INTO animals VALUES FROM (\"Joe helloasdf\", \"cat\", 4);");
-	P.Execute("INSERT INTO animals VALUES FROM (\"hello\", \"dog\", 234);");
-	P.Execute("INSERT INTO animals VALUES FROM (\"guymcthird\", \"bird\", 69);");
-	P.Execute("testselect <- select (age > 5) animals");
-	P.Execute("WRITE animals");
-	P.Execute("CLOSE animals");
-	DB.getRelation("animals")->Print();
-	P.Execute("EXIT");
-}
-
