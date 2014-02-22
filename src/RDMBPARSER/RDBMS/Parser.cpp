@@ -441,9 +441,13 @@ public:
 		C->Execute(DB, CurInput);
 	}
 
-	void ExecuteQuery(string Input)
+	void ExecuteQuery(string Token)
 	{
-		// NOTE: Still needs implimentation 
+		string QueryResultName = Token;
+		QueryResultName.pop_back(); // Removes -
+		QueryResultName.pop_back(); // Removes <
+		trim(QueryResultName);
+		//You have your query result name, and the rest of 'input' is your string.
 	}
 
 	bool IsCommand(string Token)
@@ -458,6 +462,11 @@ public:
 
 	bool IsQuery(string Token)
 	{
+		if (Token.size() > 2)
+		{
+			if (Token[Token.size() - 2] == '<' && Token[Token.size()-1] == '-')
+				return true;
+		}
 		return false;
 		// NOTE: Still needs implimentation 
 	}
@@ -708,12 +717,10 @@ RelationName::RelationName() {
 bool RelationName::Execute(Database* DB, string input) {
 
 	string isName = GrabToken(input);
-	isName = ltrim(input);
+	ltrim(input);
 
 	if (GrabToken(input) != "<-") {
-
 		return false;
-
 	} // end if statements 
 
 	if (alpha(isName[0]) == false) return false;
@@ -725,9 +732,9 @@ bool RelationName::Execute(Database* DB, string input) {
 			Identifer = "";
 			return false;
 
-		} // end if statement
+		} // end if statement - NOTE: obvious why do this?
 
-	} // end for loop
+	} // end for loop  - NOTE: please stop
 
 	// NOTE: This needs to account for new relations created by relations too in the case of relation_name <- (expr) 
 	relation = DB->getRelation(isName);
@@ -1345,26 +1352,4 @@ bool NaturalJoin::Execute(Database* DB, string input) {
 	relation = newRelation;
 
 } // end Execute(Database*, string)
-
-
-int main()
-{
-	Database DB;
-	vector<_Column> Columns;
-	Columns.push_back(_Column("ID", true, _Type::INT));
-	Columns.push_back(_Column("Name", false, _Type::VARCHAR));
-	Columns.push_back(_Column("Pet", false, _Type::VARCHAR));
-	Columns.push_back(_Column("Age", false, _Type::INT));
-	DB.createTable("animals", Columns);
-	Parser P(&DB);
-
-
-	P.Execute("CREATE TABLE animals (ID INTEGER, Name VARCHAR(20), PET VARCHAR(20), Age INTEGER)");
-	P.Execute("INSERT INTO animals VALUES FROM (\"Joe helloasdf\", \"cat\", 4);");
-	P.Execute("INSERT INTO animals VALUES FROM (\"hello\", \"dog\", 234);");
-	P.Execute("WRITE animals");
-	P.Execute("CLOSE animals");
-	DB.getRelation("animals")->Print();
-	P.Execute("EXIT");
-}
 
