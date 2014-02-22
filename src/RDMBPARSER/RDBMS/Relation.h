@@ -55,14 +55,16 @@ public:
 
 	string GetName();
 	_Data GetRow(int Column, int Row);
+	_Data GetRow2(int Column, int Row);
 
 	void AddColumn(_Column c);
 	void AddRow(vector<_Data> a);
 	void RemoveRow(int Row);
 
-	vector<void*> GetRow(int index);
-	vector<void*> CombineRows(int index1, int index2);
+	vector<_Data> GetRow(int index);
+	vector<_Data> CombineRows(vector<_Data> a, vector<_Data> b);
 
 	_Data* GetElementByKey(_Data* ID, int ColID);
+	int removeColumn(int a);
 	void Print();
 };

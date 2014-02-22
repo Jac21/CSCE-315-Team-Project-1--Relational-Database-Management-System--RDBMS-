@@ -1,19 +1,113 @@
-﻿Build started 2/21/2014 2:56:25 PM.
-     1>Project "C:\Users\csauers\Source\Repos\Assignment2Git\src\RDMBPARSER\RDBMS\RDBMS.vcxproj" on node 2 (Build target(s)).
+﻿Build started 2/22/2014 2:13:25 PM.
+     1>Project "C:\Users\Jac21ASUS\Documents\GitHub\CSCE-315-Team-Project-1--Relational-Database-Management-System--RDBMS-\src\RDMBPARSER\RDBMS\RDBMS.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt PizzaMain.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Database.cpp Parser.cpp PizzaMain.cpp Relation.cpp
+         Relation.cpp
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\relation.cpp(79): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\relation.cpp(98): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\relation.cpp(108): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\relation.cpp(116): warning C4018: '<=' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\relation.cpp(123): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\relation.cpp(125): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\relation.cpp(143): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\relation.cpp(151): warning C4018: '<' : signed/unsigned mismatch
          PizzaMain.cpp
+         Parser.cpp
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\parser.cpp(220): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\parser.cpp(234): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\parser.cpp(239): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\parser.cpp(242): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\parser.cpp(255): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\parser.cpp(360): warning C4129: ',' : unrecognized character escape sequence
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\parser.cpp(383): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\parser.cpp(385): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\parser.cpp(389): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\parser.cpp(455): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\parser.cpp(477): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\parser.cpp(513): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\parser.cpp(547): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\parser.cpp(557): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\parser.cpp(694): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\parser.cpp(728): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\parser.cpp(888): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\parser.cpp(947): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\parser.cpp(1002): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\parser.cpp(1035): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\parser.cpp(1100): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\parser.cpp(1132): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\parser.cpp(1197): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\parser.cpp(1229): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\parser.cpp(1313): warning C4018: '<' : signed/unsigned mismatch
+         Database.cpp
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(15): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(29): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(33): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(35): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(56): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(58): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(69): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(84): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(86): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(87): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(104): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(121): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(126): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(145): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(147): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(158): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(166): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(190): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(199): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(210): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(215): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(226): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(228): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(230): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(242): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(257): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(264): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(265): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(267): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(274): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(275): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(289): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(295): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(296): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(298): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(318): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(321): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(324): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(328): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(332): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(333): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(344): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(347): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(374): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(385): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(386): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(413): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(424): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(425): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(440): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(443): warning C4018: '<' : signed/unsigned mismatch
+         Generating Code...
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\database.cpp(117): warning C4715: 'Database::setDifference' : not all control paths return a value
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\parser.cpp(686): warning C4715: 'GrabColumn' : not all control paths return a value
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\parser.cpp(1354): warning C4715: 'NaturalJoin::Execute' : not all control paths return a value
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\parser_redux.h(16): warning C4715: 'Query::IsQuery' : not all control paths return a value
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\parser.cpp(562): warning C4715: 'GrabToken' : not all control paths return a value
+     1>c:\users\jac21asus\documents\github\csce-315-team-project-1--relational-database-management-system--rdbms-\src\rdmbparser\rdbms\relation.cpp(113): warning C4715: '_Relation::GetElementByKey' : not all control paths return a value
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\csauers\Source\Repos\Assignment2Git\src\RDMBPARSER\Debug\RDBMS.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\csauers\Source\Repos\Assignment2Git\src\RDMBPARSER\Debug\RDBMS.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\csauers\Source\Repos\Assignment2Git\src\RDMBPARSER\Debug\RDBMS.lib" /MACHINE:X86 Debug\Condition.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Jac21ASUS\Documents\GitHub\CSCE-315-Team-Project-1--Relational-Database-Management-System--RDBMS-\src\RDMBPARSER\Debug\RDBMS.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Jac21ASUS\Documents\GitHub\CSCE-315-Team-Project-1--Relational-Database-Management-System--RDBMS-\src\RDMBPARSER\Debug\RDBMS.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Jac21ASUS\Documents\GitHub\CSCE-315-Team-Project-1--Relational-Database-Management-System--RDBMS-\src\RDMBPARSER\Debug\RDBMS.lib" /MACHINE:X86 Debug\Condition.obj
          Debug\Database.obj
          Debug\Parser.obj
          Debug\PizzaMain.obj
          Debug\Relation.obj
          Debug\TESTS.obj
          Debug\stdafx.obj
-         RDBMS.vcxproj -> C:\Users\csauers\Source\Repos\Assignment2Git\src\RDMBPARSER\Debug\RDBMS.exe
-     1>Done Building Project "C:\Users\csauers\Source\Repos\Assignment2Git\src\RDMBPARSER\RDBMS\RDBMS.vcxproj" (Build target(s)).
+         RDBMS.vcxproj -> C:\Users\Jac21ASUS\Documents\GitHub\CSCE-315-Team-Project-1--Relational-Database-Management-System--RDBMS-\src\RDMBPARSER\Debug\RDBMS.exe
+     1>Done Building Project "C:\Users\Jac21ASUS\Documents\GitHub\CSCE-315-Team-Project-1--Relational-Database-Management-System--RDBMS-\src\RDMBPARSER\RDBMS\RDBMS.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.78
+Time Elapsed 00:00:05.99

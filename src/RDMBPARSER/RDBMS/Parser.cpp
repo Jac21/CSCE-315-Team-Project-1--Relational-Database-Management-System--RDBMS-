@@ -464,7 +464,7 @@ public:
 	{
 		if (Token.size() > 2)
 		{
-			if (Token[Token.size() - 2] == '<' && Token[Token.size()-1] == '-')
+			if (Token[Token.size() - 2] == '<' && Token[Token.size() - 1] == '-')
 				return true;
 		}
 		return false;
@@ -1262,7 +1262,7 @@ bool CrossProduct::Execute(Database* DB, string input) {
 
 	} // end for loop
 
-	newRelation = (_Relation *)&(DB->crossProduct(*(Relation1), *(Relation2)));
+	newRelation = (_Relation *)(DB->crossProduct(*(Relation1), *(Relation2)));
 	DB->addRelation(*(newRelation));
 	relation = newRelation;
 	return true;
@@ -1347,7 +1347,7 @@ bool NaturalJoin::Execute(Database* DB, string input) {
 
 	} // end for loop
 
-	newRelation = (_Relation *)&(DB->naturalJoin(*(Relation1), *(Relation2)));
+	newRelation = (_Relation *)(DB->naturalJoin(*(Relation1), *(Relation2)));
 	DB->addRelation(*(newRelation));
 	relation = newRelation;
 

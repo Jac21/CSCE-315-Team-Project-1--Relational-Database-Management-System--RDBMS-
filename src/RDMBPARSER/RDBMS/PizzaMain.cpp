@@ -13,6 +13,8 @@
 #include <iomanip>
 #include <iostream>
 
+//Application entry point and DMS interface
+
 Database PizzaDB;
 
 void PrintWelcome();

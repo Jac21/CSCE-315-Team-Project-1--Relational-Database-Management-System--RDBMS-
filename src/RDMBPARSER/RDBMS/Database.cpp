@@ -53,9 +53,9 @@ _Relation Database::projection(vector<String> attributes, _Relation r) {
 _Relation Database::setDifference(_Relation& a, _Relation& b) {
 	vector<_Column> aAttributes;
 	vector<_Column> bAttributes;
-	for (int i = 0; i<a.Columns.size(); ++i)
+	for (int i = 0; i < a.Columns.size(); ++i)
 		aAttributes.push_back(a.Columns[i]);
-	for (int i = 0; i<b.Columns.size(); ++i)
+	for (int i = 0; i < b.Columns.size(); ++i)
 		bAttributes.push_back(b.Columns[i]);
 	_Relation newRelation("sudo");
 	bool okAdd = false;
@@ -84,7 +84,7 @@ _Relation Database::setDifference(_Relation& a, _Relation& b) {
 	for (int j = 0; j < aAttributes[0].Rows.size(); j++) {
 
 		for (int k = 0; k < bAttributes[0].Rows.size(); k++) {
-			for (int z = 0; z<aAttributes.size(); ++z) {
+			for (int z = 0; z < aAttributes.size(); ++z) {
 				if (aAttributes[z].Rows[j].Data != bAttributes[z].Rows[j].Data) {
 
 					okAdd = true;
@@ -101,7 +101,7 @@ _Relation Database::setDifference(_Relation& a, _Relation& b) {
 
 		if (okAdd == true) {
 			vector<_Data> dt;
-			for (int i = 0; i<aAttributes.size(); ++i) {
+			for (int i = 0; i < aAttributes.size(); ++i) {
 				dt.push_back(aAttributes[i].Get_Data(j));
 				newRelation.AddRow(dt);
 
@@ -142,9 +142,9 @@ _Relation Database::setUnion(_Relation a, _Relation b)
 {
 	vector<_Column> aAttributes;
 	vector<_Column> bAttributes;
-	for (int i = 0; i<a.Columns.size(); ++i)
+	for (int i = 0; i < a.Columns.size(); ++i)
 		aAttributes.push_back(a.Columns[i]);
-	for (int i = 0; i<b.Columns.size(); ++i)
+	for (int i = 0; i < b.Columns.size(); ++i)
 		bAttributes.push_back(b.Columns[i]);
 	_Relation newRelation("sudo");
 	vector<_Column> newAttribute;
@@ -183,24 +183,7 @@ _Relation Database::setUnion(_Relation a, _Relation b)
 
 } // end setUnion(Relation&, Relation&)
 
-// Cross Products definition should go here
-
-_Relation Database::crossProduct(_Relation& c, _Relation& k)
-{
-	_Relation p("fuasdfasdfk");
-	return p;
-}
-
-
-// Natural Joins definition should go here
-
-_Relation Database::naturalJoin(_Relation& c, _Relation& k)
-{
-	_Relation p("fasdfasdf");
-	return p;
-}
-
-/* Function that cretes a relation
+/* Function that creates a relation
 ...with the specified name, attributes, and keys */
 void Database::createTable(String name, Vector<_Column> attributes) {
 	_Relation r = _Relation(name);
@@ -240,9 +223,9 @@ void Database::insertInto(String name, Vector<String> literals) {
 ...Takes the relation and adds it to the relation
 ...with the given name.							    */
 void Database::insertInto(String name, _Relation& r) {
-	for (int i = 0; i<allRelations.size(); ++i) {
+	for (int i = 0; i < allRelations.size(); ++i) {
 		if (allRelations[i].GetName() == name) {
-			for (int i = 0; i<r.Columns.size(); ++i) {
+			for (int i = 0; i < r.Columns.size(); ++i) {
 				vector<_Data> d;
 				for (int j = 0; j < r.Columns[i].Rows.size(); ++j) {
 					d.push_back(r.GetRow(i, j));
@@ -278,18 +261,18 @@ void Database::update(String rname, vector<String> attributes, vector<_Data> new
 	}
 
 	_Relation r2 = c.evaluate(&allRelations[indr]);
-	for (int i = 0; i<r2.Columns[0].Rows.size(); ++i) {
-		for (int j = 0; j<allRelations[indr].Columns[0].Rows.size(); ++j) {
+	for (int i = 0; i < r2.Columns[0].Rows.size(); ++i) {
+		for (int j = 0; j < allRelations[indr].Columns[0].Rows.size(); ++j) {
 			bool upd = true;
-			for (int k = 0; k<allRelations[indr].Columns.size(); ++i) {
+			for (int k = 0; k < allRelations[indr].Columns.size(); ++i) {
 				if (r2.Columns[k].Rows[i].Data != allRelations[indr].Columns[k].Rows[j].Data) {
 					upd = false;
 					break;
 				}
 			}
 			if (upd == true) {
-				for (int y = 0; y<attributes.size(); ++y) {
-					for (int z = 0; z<allRelations[indr].Columns.size(); ++z) {
+				for (int y = 0; y < attributes.size(); ++y) {
+					for (int z = 0; z < allRelations[indr].Columns.size(); ++z) {
 						if (attributes[y] == allRelations[indr].Columns[z].Name) {
 							allRelations[indr].Columns[z].Rows[j] = newvalues[y];
 						}
@@ -324,4 +307,157 @@ void Database::deleteFrom(String name, Condition& c) {
 			}
 		}
 	}
+}
+
+// Computes the cross product of the two relations
+_Relation* Database::crossProduct(_Relation& a, _Relation& b) {
+	vector<vector<_Data> > aRows;
+	vector<vector<_Data> > bRows;
+	int i, j;
+	_Relation* newRelation = new _Relation("sudo");
+	for (i = 0; i < a.Columns.size(); i++) {
+		newRelation->AddColumn(_Column(a.Columns[i].Name, a.Columns[i].AutoIncrement, a.Columns[i].Type));
+	} // end for loop
+	for (j = 0; j < b.Columns.size(); j++) {
+		newRelation->AddColumn(_Column(b.Columns[j].Name, b.Columns[j].AutoIncrement, b.Columns[j].Type));
+	} // end for loop
+	for (i = 0; i < a.Columns[0].Rows.size(); i++) {
+		//vector<_Data> blah = a.GetRow(i);
+		//aRows.push_back(a.GetRow(i));			NEED TO FIX CONVERSION ERROR
+	} // end for loop 
+	for (j = 0; j < b.Columns[0].Rows.size(); j++) {
+		//bRows.push_back(b.GetRow(j));			NEED TO FIX CONVERSION ERROR
+	} // end for loop
+	vector<_Data> combinedRow;
+	for (int k = 0; k < aRows.size(); k++) {
+		for (int l = 0; l < bRows.size(); l++) {
+			//combinedRow = a.CombineRows(aRows[k], bRows[l]);		NEED TO FIX CONVERSION ERROR
+			//newRelation->AddRow(combinedRow);
+		} // end for loop for l
+	} // end for loop for k
+	return newRelation;
+} // end crossProduct(Relation&, Relation&)
+
+// Helper function that gets the Columns to go in the natural Join Relation
+vector<_Column>* getColumns(_Relation tempRelation, _Relation* crossRelation) {
+	vector<_Column>* columns = new vector<_Column>();
+	for (int i = 0; i < tempRelation.Columns.size(); ++i) {
+		bool addCommon = false;
+		int j;
+		for (j = i + 1; j < tempRelation.Columns.size(); ++j) {
+			if (tempRelation.Columns[i].Name == tempRelation.Columns[j].Name) {
+				addCommon = true;
+				break;
+			}
+		}
+		if (addCommon) {
+			columns->push_back(_Column(crossRelation->Columns[i].Name,
+				crossRelation->Columns[i].AutoIncrement,
+				crossRelation->Columns[i].Type));
+			if (tempRelation.removeColumn(j) == -1) {
+				cerr << "Error: Column could not be removed in natural join.\n";
+				return NULL;
+			}
+		}
+		else {
+			columns->push_back(_Column(crossRelation->Columns[i].Name,
+				crossRelation->Columns[i].AutoIncrement,
+				crossRelation->Columns[i].Type));
+		}
+	}
+	return columns;
+}
+
+// Add the Columns to the Relation
+void addColumnsToNJ(_Relation* naturalJoin, vector<_Column>* columns) {
+	if (columns != NULL) {
+		for (int i = 0; i < columns->size(); ++i) {
+			naturalJoin->AddColumn(columns->at(i));
+		}
+	}
+	else {
+		cerr << "Error: Get Columns Failed.\n";
+	}
+}
+// Compare Rows to see if it is able to be added
+// Returns false if it is not to be added  true if it is
+bool compareRow(_Relation* crossRelation, int i) {
+	for (int j = 0; j < crossRelation->Columns.size(); ++j) {
+		for (int k = j + 1; k < crossRelation->Columns.size(); ++k) {
+			if (crossRelation->Columns[j].Name == crossRelation->Columns[k].Name) {
+				if (crossRelation->Columns[j].Type == crossRelation->Columns[k].Type
+					&& crossRelation->Columns[k].Type == _Type::INT) {
+					int p = *((int*)crossRelation->Columns[j].Rows[i].Data);
+					int p2 = *((int*)crossRelation->Columns[k].Rows[i].Data);
+					if (p != p2) {
+						return false;
+					}
+				}
+				if (crossRelation->Columns[j].Type == crossRelation->Columns[k].Type
+					&& crossRelation->Columns[k].Type == _Type::VARCHAR) {
+					string* p = (string*)crossRelation->Columns[j].Rows[i].Data;
+					string* p2 = (string*)crossRelation->Columns[k].Rows[i].Data;
+					if (*p != *p2) {
+						return false;
+					}
+				}
+				break;
+			}
+		}
+	}
+	return true;
+}
+
+// Checks if the string has already been used
+bool notUsed(string k, vector<string> a) {
+	for (int i = 0; i < a.size(); ++i) {
+		if (a[i] == k) {
+			return false;
+		}
+	}
+	return true;
+}
+
+// Adds the row i from crossRelation to the relation naturalJoin
+void addRowToNJ(_Relation* naturalJoin, _Relation* crossRelation, int z) {
+	vector<string> alreadyused;
+	for (int i = 0; i < naturalJoin->Columns.size(); ++i) {
+		for (int j = 0; j < crossRelation->Columns.size(); ++j) {
+			if (naturalJoin->Columns[i].Name == crossRelation->Columns[j].Name) {
+				if (notUsed(naturalJoin->Columns[i].Name, alreadyused)) {
+					naturalJoin->Columns[i].Rows.push_back(crossRelation->Columns[j].Rows[z]);
+					alreadyused.push_back(naturalJoin->Columns[i].Name);
+				}
+				break;
+			}
+		}
+	}
+}
+
+// Adds the rows supposed to go into the natural join relation
+void addRows(_Relation* naturalJoin, _Relation* crossRelation) {
+	vector<string> names;
+	for (int i = 0; i < crossRelation->Columns.size(); ++i) {
+		names.push_back(crossRelation->Columns[i].Name);
+	}
+	for (int i = 0; i < crossRelation->Columns[0].Rows.size(); ++i) {
+		bool addRow;
+		addRow = compareRow(crossRelation, i);
+		if (addRow) {
+			addRowToNJ(naturalJoin, crossRelation, i);
+		}
+	}
+}
+
+// Natural Join of two Relations/Tables
+_Relation* Database::naturalJoin(_Relation& a, _Relation& b) {
+	_Relation* crossRelation = crossProduct(a, b);
+	_Relation tempRelation = *(crossRelation);
+	_Relation* naturalJoin = new _Relation("Sudo");
+	vector<_Column>* columns;
+	columns = getColumns(tempRelation, crossRelation);
+	addColumnsToNJ(naturalJoin, columns);
+	addRows(naturalJoin, crossRelation);
+	delete crossRelation;
+	return naturalJoin;
 }

@@ -1,7 +1,7 @@
 #include "Relation.h"
 
 //Testing
-/* -- DATA CLTestRow -- 
+/* -- DATA CLTestRow --
    -- CONSTRUCTOR -- */
 _Data::_Data(void) {}
 
@@ -35,7 +35,7 @@ ostream& operator<<(ostream& out, const _Data& d){
 	return out;
 }
 
-/* -- COLUMN CLTestRow -- 
+/* -- COLUMN CLTestRow --
    -- CONSTRUCTORS -- */
 _Column::_Column() {}
 
@@ -46,7 +46,7 @@ _Column::_Column(string Name, bool AutoIncrement, _Type Type) {
 	this->AutoKey = 0;
 }
 
-/* -- COLUMN CLTestRow -- 
+/* -- COLUMN CLTestRow --
    -- METHODS      -- */
 void _Column::AddRow(_Data a) {
 	if (!AutoIncrement)
@@ -68,8 +68,23 @@ _Relation::_Relation(string Name) {
 	this->Name = Name;
 }
 
-/* -- RELATION CLAS --
+/* -- RELATION CLASS --
    -- METHODS       -- */
+
+// Removes the Column designated with the index a
+// ... Returns 0 if succeeded -1 if it did not
+int _Relation::removeColumn(int a) {
+	int c = Columns.size();
+	Columns.erase(Columns.begin() + a);
+	if (Columns.size() < c) {
+		return 0;
+	}
+	else {
+		return -1;
+	}
+
+}
+
 string _Relation::GetName() {
 	return Name;
 }
@@ -80,21 +95,12 @@ void _Relation::AddColumn(_Column c) {
 
 void _Relation::AddRow(vector<_Data> A) {
 
-	for(int i = 0, a = 0; i < Columns.size(); i++)
+	for (int i = 0, a = 0; i < Columns.size(); i++)
 	{
-		Columns[i].AddRow(A[a]);
-		if(!Columns[i].AutoIncrement)
-			a++;
-	}
-
-
-
-	/*
-	for (int i = 0, a = 0; i < Columns.size(); ++i) {
 		Columns[i].AddRow(A[a]);
 		if (!Columns[i].AutoIncrement)
 			a++;
-	}*/
+	}
 }
 
 _Data* _Relation::GetElementByKey(_Data* ID, int ColID)
@@ -124,18 +130,25 @@ void _Relation::Print() {
 	}
 }
 
-vector<void*> _Relation::GetRow(int index) {
-	vector<void*> TestRow;
-	for(int i=0; i<=Columns[0].Rows.size(); ++i)
-		TestRow.push_back(Columns[i].Rows[index].Data);
+vector<_Data> _Relation::GetRow(int index) {
+	vector<_Data> TestRow;
+	if (Columns.size() == 0) {
+		cerr << "Error there are no columns.\n";
+		return TestRow;
+	}
+	if (Columns[0].Rows.size() == 0) {
+		cerr << "Error: there are no rows in the columns.\n";
+		return TestRow;
+	}
+	for (int i = 0; i < Columns.size(); ++i) {
+		TestRow.push_back(Columns[i].Rows[index]);
+	}
 	return TestRow;
 }
 
-vector<void*> _Relation::CombineRows(int index1, int index2) {
-	vector<void*> TestRow1 = GetRow(index1);
-	vector<void*> TestRow2 = GetRow(index2);
+vector<_Data> _Relation::CombineRows(vector<_Data> TestRow1, vector<_Data> TestRow2) {
 
-	for(int i=0; i<TestRow2.size(); ++i)
+	for (int i = 0; i < TestRow2.size(); ++i)
 		TestRow1.push_back(TestRow2[i]);
 
 	return TestRow1;
