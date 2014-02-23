@@ -1,0 +1,4 @@
+CREATE TABLE animals (ID INTEGER,Name VARCHAR,Pet VARCHAR,Age INTEGER)
+INSERT INTO animals VALUES FROM (1,"Joe helloasdf","cat",4);
+INSERT INTO animals VALUES FROM (2,"hello","dog",234);
+INSERT INTO animals VALUES FROM (3,"guymcthird","bird",69);
