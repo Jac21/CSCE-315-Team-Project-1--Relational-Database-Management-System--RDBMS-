@@ -26,6 +26,8 @@ build/
 *_p.c
 *.ilk
 *.meta
+*.suo
+*.sdf
 *.obj
 *.pch
 *.pdb
