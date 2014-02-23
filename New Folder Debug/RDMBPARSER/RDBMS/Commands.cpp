@@ -369,7 +369,7 @@ bool Update::Execute(Database* DB, string Input)
 
 	Comparison asdf(AttributeNameWhere, _Data(Argument), Comparison::EQUALS);
 	_Relation* Original = DB->getRelation(RelationName);
-	_Relation Result = (asdf.evaluate(DB->getRelation(RelationName)));	//ERROR DUE TO OUTDATED CONDITION FILE, CORRECTION CAN BE FOUND IN "MostUpDateVer2" on Dropbox
+	_Relation Result = *(asdf.evaluate(DB->getRelation(RelationName)));	//ERROR DUE TO OUTDATED CONDITION FILE, CORRECTION CAN BE FOUND IN "MostUpDateVer2" on Dropbox
 	for (int i = 0; i < Result.Columns.size(); i++)
 	{
 		for (int j = 0; j < AttributesToChange.size(); j++)

@@ -33,16 +33,16 @@ string trim(string &s) {
 // iterates and grabs every character from input
 char GrabChar(string& S)
 {
-	string NewString = "";
+	string Newstring = "";
 	S = ltrim(S);
 	if (S.length() > 0)
 	{
 		for (int i = 1; i < S.length(); i++)
 		{
-			NewString.push_back(S[i]);
+			Newstring.push_back(S[i]);
 		}
 		char ReturnChar = S[0];
-		S = NewString;
+		S = Newstring;
 		return ReturnChar;
 	}
 	return ' ';
@@ -70,20 +70,20 @@ string GrabToken(string& S)
 		}
 		else
 		{
-			string NewString = "";
+			string Newstring = "";
 			for (int i = Token.size(); i < S.size(); i++)
-				NewString.push_back(S[i]);
-			S = NewString;
+				Newstring.push_back(S[i]);
+			S = Newstring;
 			return Token;
 		}
 	}
 
 	if (Token != "")
 	{
-		string NewString = "";
+		string Newstring = "";
 		for (int i = Token.size(); i < S.size(); i++)
-			NewString.push_back(S[i]);
-		S = NewString;
+			Newstring.push_back(S[i]);
+		S = Newstring;
 		return Token;
 	}
 }
@@ -172,9 +172,9 @@ vector<_Data> GrabDataSets(string S)
 	return AllTokens;
 }
 
-vector<String> GrabColumn(string S) {
-	String Token;
-	vector<String> AllTokens;
+vector<string> GrabColumn(string S) {
+	string Token;
+	vector<string> AllTokens;
 
 	int Length = S.length();
 	for (int i = 0; i < Length; i++) {
@@ -215,21 +215,21 @@ vector<String> GrabColumn(string S) {
 static string removeParentheses(string S) {
 
 	S = trim(S);
-	string newString = "";
+	string newstring = "";
 	if (S[0] == '(' && S[S.size() - 1] == ')') {
 
 		for (int i = 1; i < S.size() - 2; i++) {
 
-			newString += S[i];
+			newstring += S[i];
 
 		} // end for loop
 
-		return newString;
+		return newstring;
 
 	} // end if statement 
 
-	newString = S;
-	return newString;
+	newstring = S;
+	return newstring;
 
 } // end removeParentheses(string)
 
@@ -408,7 +408,7 @@ bool Projection::Execute(Database* DB, string input) {
 	querys.push_back(new NaturalJoin);
 
 	input = ltrim(input);
-	vector<String> attributeList = GrabColumn(input); // NOTE: This function should grab a list of the form (attribute_name1, attribute_name2, ... , attribute_nameN)
+	vector<string> attributeList = GrabColumn(input); // NOTE: This function should grab a list of the form (attribute_name1, attribute_name2, ... , attribute_nameN)
 	string id;
 	bool success;
 	_Relation* newRelation = new _Relation("sudo");
@@ -467,7 +467,7 @@ bool Renaming::Execute(Database* DB, string input) {
 	querys.push_back(new NaturalJoin);
 
 	input = ltrim(input);
-	vector<String> attributeList = GrabColumn(input);
+	vector<string> attributeList = GrabColumn(input);
 	string id;
 	bool success;
 	_Relation* newRelation = new _Relation("sudo");

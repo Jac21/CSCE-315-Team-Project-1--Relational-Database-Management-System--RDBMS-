@@ -73,14 +73,14 @@ struct Range_error : out_of_range {	// enhanced vector range error reporting
 
 
 // trivially range-checked vector (no iterator checking):
-template< class T> struct Vector : public std::vector<T> {
+template< class T> struct vector : public std::vector<T> {
 	typedef typename std::vector<T>::size_type size_type;
 
-	Vector() { }
-	explicit Vector(size_type n) :std::vector<T>(n) {}
-	Vector(size_type n, const T& v) :std::vector<T>(n,v) {}
+	vector() { }
+	explicit vector(size_type n) :std::vector<T>(n) {}
+	vector(size_type n, const T& v) :std::vector<T>(n,v) {}
 	template <class I>
-	Vector(I first, I last) :std::vector<T>(first,last) {}
+	vector(I first, I last) :std::vector<T>(first,last) {}
 
 	T& operator[](unsigned int i) // rather than return at(i);
 	{
@@ -95,17 +95,17 @@ template< class T> struct Vector : public std::vector<T> {
 };
 
 // disgusting macro hack to get a range checked vector:
-#define vector Vector
+#define vector vector
 
 // trivially range-checked string (no iterator checking):
-struct String : std::string {
+struct string : std::string {
 	
-	String() { }
-	String(const char* p) :std::string(p) {}
-	String(const string& s) :std::string(s) {}
-	template<class S> String(S s) :std::string(s) {}
-	String(int sz, char val) :std::string(sz,val) {}
-	template<class Iter> String(Iter p1, Iter p2) : std::string(p1,p2) { }
+	string() { }
+	string(const char* p) :std::string(p) {}
+	string(const string& s) :std::string(s) {}
+	template<class S> string(S s) :std::string(s) {}
+	string(int sz, char val) :std::string(sz,val) {}
+	template<class Iter> string(Iter p1, Iter p2) : std::string(p1,p2) { }
 
 	char& operator[](unsigned int i) // rather than return at(i);
 	{
@@ -123,9 +123,9 @@ struct String : std::string {
 #ifndef _MSC_VER
 namespace __gnu_cxx {
 
-    template<> struct hash<String>
+    template<> struct hash<string>
     {
-        size_t operator()(const String& s) const
+        size_t operator()(const string& s) const
         {
             return hash<std::string>()(s);
         }
@@ -159,7 +159,7 @@ inline void error(const string& s, int i)
 
 #if _MSC_VER<1500
 	// disgusting macro hack to get a range checked string:
-	#define string String
+	#define string string
 	// MS C++ 9.0 have a built-in assert for string range check
 	// and uses "std::string" in several places so that macro substitution fails
 #endif

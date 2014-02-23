@@ -19,11 +19,11 @@ _Relation* Database::getRelation(string Name)
 }
 
 _Relation* Database::selection(Condition& c, _Relation r) {
-	_Relation* r2 = &c.evaluate(&r);
+	_Relation* r2 = c.evaluate(&r);
 	return r2;
 }
 
-_Relation* Database::projection(vector<String> attributes, _Relation r) {
+_Relation* Database::projection(vector<string> attributes, _Relation r) {
 
 	vector<_Column> rAttributes;
 	for (int i = 0; i < r.Columns.size(); ++i)
@@ -116,7 +116,7 @@ _Relation* Database::setDifference(_Relation& a, _Relation& b) {
 	} // end setDifference(Relation&, Relation&)
 }
 
-_Relation* Database::renaming(vector<String> renames, _Relation r) {
+_Relation* Database::renaming(vector<string> renames, _Relation r) {
 	vector<_Column> rAttributes;
 	_Relation* newRelation = new _Relation("sudo");
 	for (int i = 0; i < r.Columns.size(); ++i)
@@ -189,7 +189,7 @@ _Relation* Database::setUnion(_Relation a, _Relation b)
 
 /* Function that creates a relation
 ...with the specified name, attributes, and keys */
-void Database::createTable(String name, Vector<_Column> attributes) {
+void Database::createTable(string name, vector<_Column> attributes) {
 	_Relation r = _Relation(name);
 	for (int i = 0; i < attributes.size(); ++i) {
 		r.AddColumn(attributes[i]);
@@ -209,7 +209,7 @@ void Database::dropTable(_Relation r) {
 
 /* Add a row to the Relation
 ...with the smme name as name*/
-void Database::insertInto(String name, Vector<String> literals) {
+void Database::insertInto(string name, vector<string> literals) {
 	vector<_Data> d;
 	for (int i = 0; i < literals.size(); ++i) {
 		_Data dt = _Data(literals[i]);
@@ -226,7 +226,7 @@ void Database::insertInto(String name, Vector<String> literals) {
 /* After evaluating the expression and giving a relation
 ...Takes the relation and adds it to the relation
 ...with the given name.							    */
-void Database::insertInto(String name, _Relation& r) {
+void Database::insertInto(string name, _Relation& r) {
 	for (int i = 0; i < allRelations.size(); ++i) {
 		if (allRelations[i].GetName() == name) {
 			for (int i = 0; i < r.Columns.size(); ++i) {
@@ -241,7 +241,7 @@ void Database::insertInto(String name, _Relation& r) {
 }
 
 // Outputs the Relation with the matching Name
-void Database::show(String name) {
+void Database::show(string name) {
 	int i;
 	for (i = 0; i < allRelations.size(); ++i) {
 		if (allRelations[i].GetName() == name) {
@@ -255,7 +255,7 @@ void Database::show(String name) {
 
 /* Updates an attribute that meets the condition
 ...With its new value						*/
-void Database::update(String rname, vector<String> attributes, vector<_Data> newvalues, Condition& c)
+void Database::update(string rname, vector<string> attributes, vector<_Data> newvalues, Condition& c)
 {
 	int indr = 0;
 	for (indr = 0; indr < allRelations.size(); ++indr)
@@ -264,7 +264,7 @@ void Database::update(String rname, vector<String> attributes, vector<_Data> new
 			break;
 	}
 
-	_Relation r2 = c.evaluate(&allRelations[indr]);
+	_Relation r2 = *(c.evaluate(&allRelations[indr]));
 	for (int i = 0; i < r2.Columns[0].Rows.size(); ++i) {
 		for (int j = 0; j < allRelations[indr].Columns[0].Rows.size(); ++j) {
 			bool upd = true;
@@ -288,14 +288,14 @@ void Database::update(String rname, vector<String> attributes, vector<_Data> new
 }
 /* Deletes elements from the relation named Name
 ...That meet the condition */
-void Database::deleteFrom(String name, Condition& c) {
+void Database::deleteFrom(string name, Condition& c) {
 	int i;
 	for (i = 0; i < allRelations.size(); ++i){
 		if (allRelations[i].GetName() == name)
 			break;
 	}
 
-	_Relation r2 = c.evaluate(&allRelations[i]);
+	_Relation r2 = *(c.evaluate(&allRelations[i]));
 	for (int j = 0; i < r2.Columns[0].Rows.size(); ++i) {
 		for (int k = 0; k < allRelations[i].Columns[0].Rows.size(); ++k) {
 			bool del = true;
