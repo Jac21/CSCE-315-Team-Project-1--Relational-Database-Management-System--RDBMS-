@@ -58,7 +58,7 @@ bool Create::Execute(Database* DB, string Input)
 		}
 		if (ColType == "INTEGER")
 		{
-			if (ColName == "ID")
+			if (ColName == "id")
 				Columns.push_back(_Column(ColName, true, _Type::INT));
 			else
 				Columns.push_back(_Column(ColName, false, _Type::INT));

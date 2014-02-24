@@ -4,6 +4,7 @@
 #include "Relation.h"
 #include "Database.h"
 #include "Condition.h"
+#include "Parser_Redux.h"
 #include <vector>
 #include <string>
 #include <algorithm> 
@@ -17,15 +18,30 @@
 //Application entry point and DMS interface
 
 Database PizzaDB;
-
+Parser PizzaParser(&PizzaDB);
+void Initialize();
 void PrintWelcome();
 void CustomerManagementMain();
+void AddCustomer();
 void PizzaManagementMain();
 void FinancesManagementMain();
 
 
+void Initialize()
+{
+	PizzaParser.Execute("CREATE TABLE customer (id INTEGER, name VARCHAR(64),phone VARCHAR(64) address VARCHAR(64));");
+	PizzaParser.Execute("CREATE TABLE pizza (id INTEGER, toppingfk INTEGER, crustfk INTEGER, cheesefk INTEGER);");
+	PizzaParser.Execute("CREATE TABLE crust (id INTEGER, name VARCHAR(64), cost INTEGER, calories INTEGER);");
+	PizzaParser.Execute("CREATE TABLE topping (id INTEGER, name VARCHAR(64), cost INTEGER, calories INTEGER, vegetarian INTEGER);");
+	PizzaParser.Execute("CREATE TABLE cheese (id INTEGER, name VARCHAR(64), cost INTEGER, calories INTEGER);");
+
+	PizzaParser.Execute("INSERT INTO customer VALUES FROM (\"Guy McThird\", \"324-340-3495\", \"1235 fakestreet\")");
+	PizzaParser.Execute("INSERT INTO customer VALUES FROM (\"Guy McSecond\", \"324-320-3562\", \"4559 street\")");
+}
+
 int main()
 {
+	Initialize();
 	system("CLS");
 	PrintWelcome();
 	getchar();
@@ -71,6 +87,7 @@ void CustomerManagementMain()
 	{
 		cout << "CURRENTLY IN CUSTOMER MANAGEMENT" << endl;
 		cout << "------------" << endl;
+		cout << "1) View Customers" << endl;
 		cout << "1) Add Customer" << endl;
 		cout << "2) Edit Customer" << endl;
 		cout << "3) Update Customer" << endl;
@@ -85,10 +102,10 @@ void CustomerManagementMain()
 		switch (Choice[0])
 		{
 		case '1':
-			//CustomerManagementMain();
+			PizzaDB.show("customer");
 			break;
 		case '2':
-			//PizzaManagementMain();
+			AddCustomer();
 			break;
 		case '3':
 			//FinancesManagementMain();
@@ -96,6 +113,8 @@ void CustomerManagementMain()
 		case '4':
 			break;
 		case '5':
+			break;
+		case '6':
 			return;
 			break;
 		default:
@@ -103,6 +122,25 @@ void CustomerManagementMain()
 			break;
 		}
 	}
+}
+
+void AddCustomer()
+{
+	string Name;
+	string Phone;
+	string Address;
+	cout << "\n====================\n";
+	cout << "===ADDING CUSTOMER==\n";
+	cout << "====================\n";
+	cout << "Insert Name: ";
+	getline(cin, Name);
+	cout << "\nInsert Phone: ";
+	getline(cin, Phone);
+	cout << "\nInsert Address: ";
+	getline(cin, Address);
+
+	PizzaParser.Execute("INSERT INTO customer VALUES FROM (\"" + Name + "\", \"" + Phone + "\", \"" + Address + "\")");
+	cout << "\n Inserted" + Name + " " + Phone + " " + Address + "\n";
 }
 
 void PizzaManagementMain()

@@ -120,13 +120,14 @@ void _Relation::RemoveRow(int Row) {
 }
 
 void _Relation::Print() {
-	for (int i = 0; i < Columns.size(); i++)
+	for (int k = 0; k < Columns[0].Rows.size(); k++)
 	{
-		for (int k = 0; k < Columns[0].Rows.size(); k++)
+		for (int i = 0; i < Columns.size(); i++)
 		{
 			cout << Columns[i].Get_Data(k);
-			cout << '\n';
+			cout << " -- ";
 		}
+		cout << '\n';
 	}
 }
 
