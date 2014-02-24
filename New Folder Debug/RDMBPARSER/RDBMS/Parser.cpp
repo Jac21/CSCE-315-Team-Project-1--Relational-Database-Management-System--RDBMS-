@@ -212,13 +212,63 @@ vector<string> GrabColumn(string S) {
 
 } // end GrabColumn
 
-static string removeParentheses(string S) {
+vector<string> GrabCondition(string& S) {
+
+	string Token;
+	vector<string> AllTokens;
+
+	int Length = S.length();
+	for (int i = 0; i < Length; i++) {
+
+		if (S[i] != '(' && S[i] != ')') {
+
+			if (S[i] != ' ' && S[i] != '"') {
+
+				Token += S[i];
+
+			} else {
+
+				if (Token != "") {
+					AllTokens.push_back(trim(Token));
+					Token = "";
+				} // end if statement 
+
+			} // end if else statement 
+
+		} else {
+
+			if (Token != "") {
+				AllTokens.push_back(trim(Token));
+				Token = "";
+			} // end if statement 
+
+		} // end if else statement 
+
+		if (S[i] == ')') {
+
+			string newS = "";
+			for (int j = i + 1; j < S.size(); j++) {
+
+				newS += S[j];
+
+			} // end for loop
+			S = newS;
+
+			return AllTokens;
+
+		} // end of statement 
+
+	}  // end for loop 
+
+} // end GrabColumn(string)
+
+string removeParentheses(string S) {
 
 	S = trim(S);
 	string newstring = "";
 	if (S[0] == '(' && S[S.size() - 1] == ')') {
 
-		for (int i = 1; i < S.size() - 2; i++) {
+		for (int i = 1; i < S.size() - 1; i++) {
 
 			newstring += S[i];
 
@@ -243,50 +293,46 @@ RelationName::RelationName() {
 // sees if the input is a relation name (must start with a-z or A-Z)
 bool RelationName::Execute(Database* DB, string input) {
 
+	ltrim(input);
+	string test = input;
 	string isName = GrabToken(input);
 	ltrim(input);
 
-	if (GrabToken(input) != "<-") {
-		return false;
-	} // end if statements 
+	if (isName[(isName.size() - 1)] == ';') {
+		isName.pop_back();
+		test.pop_back();
+	} // end if statement 
 
-	/*if (isalpha(isName[0]) && (isName[0] == '_') == false) 
-		return false;*/
+	if (isName != test) return false;
 
 	if (alpha(isName[0]) == false) return false;
 
 	for (int i = 1; i < isName.size(); i++) {
 
-		if (alpha(isName[i]) == false || isdigit(isName[i]) == false) {
-		//if (isalpha(isName[i]) == false || isName[i] == '_' == false || isdigit(isName[i]) == false) {
+		if (alpha(isName[i]) == true || digit(isName[i]) == true) {
 
-			Identifer = "";
+			// empty -- we're good if this is true 
+
+		}
+		else {
+
+			// if we get here, it was neither an alpha or a digit and is therefore bad 
 			return false;
 
-		} // end if statement - NOTE: obvious why do this?
+		} // end if else statment 
 
 	} // end for loop  - NOTE: please stop
 
-	// NOTE: This needs to account for new relations created by relations too in the case of relation_name <- (expr) 
 	relation = DB->getRelation(isName);
+	if (relation == NULL) {
+
+		cout << "This relation is not in the database.";
+		return false;
+	} // end if statement 
+
 	return true;
 
 } // end execute(Database, string)
-
-bool RelationName::isArrow(string input) {
-
-	string isArrow = "" + input[0] + input[1];
-	string shouldBe = "<-";
-
-	if (isArrow.compare(shouldBe)) {
-
-		return true;
-
-	} // end if statement
-
-	return false;
-
-} // end isArrow(string)
 
 bool RelationName::digit(char d) {
 
@@ -365,7 +411,7 @@ bool RelationName::alpha(char a) {
 	default: return false;
 	} // end switch statement
 
-}
+} // end alpha(char)
 
 
 Selection::Selection() {
@@ -385,9 +431,76 @@ bool Selection::Execute(Database* DB, string input) {
 	querys.push_back(new CrossProduct);
 	querys.push_back(new NaturalJoin);
 
-	//NOTE: How did you do condition? This is needed here. 
-	return false;
+	input = ltrim(input);
+	if (input[input.size() - 1] == ';') {
+		input.pop_back();
+	} // end if statement 
+	string id = GrabToken(input);
+	if (id != Identifer) return false;
+	input = ltrim(input);
+	vector<string> condition = GrabCondition(input);
+	string AttributeNameWhere = condition[0];
+	string cond = condition[1];
+	string Argument = condition[2];
+	input = ltrim(input);
+	Comparison c;
+	if (cond == "==") {
 
+		c = Comparison(AttributeNameWhere, _Data(Argument), Comparison::EQUALS);
+
+	}
+	else if (cond == ">=") {
+
+		c = Comparison(AttributeNameWhere, _Data(Argument), Comparison::GREATERTHANOREQUAL);
+
+	}
+	else if (cond == "<=") {
+
+		c = Comparison(AttributeNameWhere, _Data(Argument), Comparison::LESSTNANOREQUAL);
+
+	}
+	else if (cond == "!=") {
+
+		c = Comparison(AttributeNameWhere, _Data(Argument), Comparison::NOTEQUALS);
+
+	}
+	else if (cond == ">") {
+
+		c = Comparison(AttributeNameWhere, _Data(Argument), Comparison::GREATERTHAN);
+
+	}
+	else if (cond == "<") {
+
+		c = Comparison(AttributeNameWhere, _Data(Argument), Comparison::LESSTHAN);
+
+	} // end if else statement for condition 
+
+	bool success;
+	_Relation* newRelation = NULL;
+	_Relation* Relation = NULL;
+
+	input = removeParentheses(input); // NOTE: This should remove the parentheses around a (expr) 
+
+	for (int i = 0; i < querys.size(); i++) {
+
+		success = querys[i]->Execute(DB, input);  // NOTE: this should evaluate to true if it was able to parse the input for that type of query 
+		if (success && querys[i]->IsQuery(id)) {
+
+			Relation = querys[i]->relation; // NOTE: if success was true, then we succeeded in parsing the relation 
+			break;
+
+		} // end if statement
+
+	} // end for loop
+
+	if (Relation != NULL) {
+
+		newRelation = (DB->selection(c, *(Relation)));
+		relation = newRelation;
+		return true;
+	} // end if statement 
+
+	return false;
 } // end Exectue 
 
 Projection::Projection() {
@@ -408,29 +521,27 @@ bool Projection::Execute(Database* DB, string input) {
 	querys.push_back(new NaturalJoin);
 
 	input = ltrim(input);
-	vector<string> attributeList = GrabColumn(input); // NOTE: This function should grab a list of the form (attribute_name1, attribute_name2, ... , attribute_nameN)
-	string id;
+	if (input[input.size() - 1] == ';') {
+		input.pop_back();
+	} // end if statement 
+	string id = GrabToken(input);
+	if (id != Identifer) return false;
+	input = ltrim(input);
+	vector<string> attributeList = GrabColumn(input); // this function should grab a list of the form (attribute_name1, attribute_name2, ... , attribute_nameN)
+	input = ltrim(input);
 	bool success;
-	_Relation* newRelation = new _Relation("sudo");
-	_Relation* Relation = new _Relation("sudo");
+	_Relation* newRelation = NULL;
+	_Relation* Relation = NULL;
 
 	input = removeParentheses(input); // NOTE: This should remove the parentheses around a (expr) 
 
 	for (int i = 0; i < querys.size(); i++) {
 
-		id = GrabToken(input); // NOTE: this should grab the identifier of the function (if it has one) 
-		id = trim(id);
-
-		if (id != "select" || id != "project" || id != "rename" && i == 0) {
-
-			id = ""; // NOTE: this should set the identifier to "" in the case of which it doesn't have a real identifier 
-
-		} // end if statement 
-
 		success = querys[i]->Execute(DB, input);  // NOTE: this should evaluate to true if it was able to parse the input for that type of query 
 		if (success && querys[i]->IsQuery(id)) {
 
 			Relation = querys[i]->relation; // NOTE: if success was true, then we succeeded in parsing the relation 
+			break;
 
 		} // end if statement
 
@@ -467,29 +578,27 @@ bool Renaming::Execute(Database* DB, string input) {
 	querys.push_back(new NaturalJoin);
 
 	input = ltrim(input);
-	vector<string> attributeList = GrabColumn(input);
-	string id;
+	if (input[input.size() - 1] == ';') {
+		input.pop_back();
+	} // end if statement 
+	string id = GrabToken(input);
+	if (id != Identifer) return false;
+	input = ltrim(input);
+	vector<string> attributeList = GrabColumn(input); // this function should grab a list of the form (attribute_name1, attribute_name2, ... , attribute_nameN)
+	input = ltrim(input);
 	bool success;
-	_Relation* newRelation = new _Relation("sudo");
-	_Relation* Relation = new _Relation("sudo");
+	_Relation* newRelation = NULL;
+	_Relation* Relation = NULL;
 
 	input = removeParentheses(input);
 
 	for (int i = 0; i < querys.size(); i++) {
 
-		id = GrabToken(input);
-		id = trim(id);
-
-		if (id != "select" || id != "project" || id != "rename" && i == 0) {
-
-			id = "";
-
-		} // end if statement 
-
 		success = querys[i]->Execute(DB, input);
 		if (success && querys[i]->IsQuery(id)) {
 
 			Relation = querys[i]->relation;
+			break;
 
 		} // end if statement
 
@@ -497,8 +606,7 @@ bool Renaming::Execute(Database* DB, string input) {
 	if (Relation != NULL) {
 
 		// NOTE: This still needs the renamed relation to give to relation 
-		DB->renaming(attributeList, *(Relation));
-		DB->addRelation(*(newRelation));
+		newRelation = DB->renaming(attributeList, *(Relation));
 		relation = newRelation;
 		return true;
 
@@ -527,14 +635,17 @@ bool SetUnion::Execute(Database* DB, string input) {
 	querys.push_back(new NaturalJoin);
 
 	input = ltrim(input);
-	string relation1;
-	string relation2;
+	if (input[input.size() - 1] == ';') {
+		input.pop_back();
+	} // end if statement 
+	string relation1 = "";
+	string relation2 = "";
 	bool r = false;
 	for (int i = 0; i < input.size(); i++) {
 
 		if (input[i] != '+' && r == false) {
 
-			relation1 += input[0];
+			relation1 += input[i];
 
 		}
 		else if (input[i] == '+') {  // NOTE: this won't find the correct + if there is more than one in the query (same for SetDifference, CrossProduct, and NaturalJoin) 
@@ -543,7 +654,7 @@ bool SetUnion::Execute(Database* DB, string input) {
 
 		} // end if else 
 
-		if (r) {
+		if (input[i] != '+' && r) {
 
 			relation2 += input[i];
 
@@ -551,58 +662,62 @@ bool SetUnion::Execute(Database* DB, string input) {
 
 	} // end for loop 
 
+	relation1 = trim(relation1);
+	relation2 = trim(relation2);
+	if (relation1 == "") return false;
+	if (relation2 == "") return false; 
+
 	// This should do what Projection does to evaluate a (expr), except for two (same for SetDifference, CrossProduct, and NaturalJoin) 
-	string id1;
-	string id2;
 	bool success1;
 	bool success2;
 	_Relation *newRelation;
-	_Relation* Relation1 = new _Relation("sudo");
-	_Relation* Relation2 = new _Relation("sudo");
+	_Relation* Relation1 = NULL;
+	_Relation* Relation2 = NULL;
+	bool got1 = false;
+	bool got2 = false;
 
 	relation1 = removeParentheses(relation1);
 	relation2 = removeParentheses(relation2);
 
+	string r1 = "";
+	string r2 = "";
+
 	for (int i = 0; i < querys.size(); i++) {
 
-		id1 = GrabToken(relation1);
-		id1 = trim(id1);
-		id2 = GrabToken(relation2);
-		id2 = trim(id2);
+		r1 = relation1;
+		success1 = querys[i]->Execute(DB, r1);
 
-		if (id1 != "select" || id1 != "project" || id1 != "rename" && i == 0) {
-
-			id1 = "";
-
-		} // end if statement 
-
-		if (id2 != "select" || id2 != "project" || id2 != "rename" && i == 0) {
-
-			id2 = "";
-
-		} // end if statement 
-
-		success1 = querys[i]->Execute(DB, relation1);
-		success2 = querys[i]->Execute(DB, relation2);
-
-		if (success1 && querys[i]->IsQuery(id1)) {
+		if (success1 && !got1) {
 
 			Relation1 = querys[i]->relation;
+			got1 = true;
 
 		} // end if statement
 
-		if (success2 && querys[i]->IsQuery(id2)) {
+		r2 = relation2;
+		success2 = querys[i]->Execute(DB, r2);
+
+		if (success2 && !got2) {
 
 			Relation2 = querys[i]->relation;
+			got2 = true;
 
 		} // end if statement
+
+		if (got1 && got2) break;
 
 	} // end for loop
 
-	newRelation = (DB->setUnion(*(Relation1), *(Relation2)));
-	DB->addRelation(*(newRelation));
-	relation = newRelation;
-	return true;
+	if (Relation1 != NULL && Relation2 != NULL) {
+
+		newRelation = (DB->setUnion(*(Relation1), *(Relation2)));
+		DB->addRelation(*(newRelation));
+		relation = newRelation;
+		return true;
+
+	} // end if statement 
+
+	return false;
 
 } // end Execute(Database*, string)
 
@@ -625,23 +740,26 @@ bool SetDifference::Execute(Database* DB, string input) {
 	querys.push_back(new NaturalJoin);
 
 	input = ltrim(input);
-	string relation1;
-	string relation2;
+	if (input[input.size() - 1] == ';') {
+		input.pop_back();
+	} // end if statement 
+	string relation1 = "";
+	string relation2 = "";
 	bool r = false;
 	for (int i = 0; i < input.size(); i++) {
 
 		if (input[i] != '-' && r == false) {
 
-			relation1 += input[0];
+			relation1 += input[i];
 
 		}
-		else if (input[i] == '-') {
+		else if (input[i] == '-') {  // NOTE: this won't find the correct + if there is more than one in the query (same for SetDifference, CrossProduct, and NaturalJoin) 
 
 			r = true;
 
 		} // end if else 
 
-		if (r) {
+		if (input[i] != '-' && r) {
 
 			relation2 += input[i];
 
@@ -649,57 +767,64 @@ bool SetDifference::Execute(Database* DB, string input) {
 
 	} // end for loop 
 
+	relation1 = trim(relation1);
+	relation2 = trim(relation2);
+	if (relation1 == "") return false;
+	if (relation2 == "") return false;
+
+	// This should do what Projection does to evaluate a (expr), except for two (same for SetDifference, CrossProduct, and NaturalJoin) 
 	string id1;
 	string id2;
 	bool success1;
 	bool success2;
-	_Relation* newRelation;
-	_Relation* Relation1 = new _Relation("sudo");
-	_Relation* Relation2 = new _Relation("sudo");
+	_Relation *newRelation;
+	_Relation* Relation1 = NULL;
+	_Relation* Relation2 = NULL;
+	bool got1 = false;
+	bool got2 = false;
 
 	relation1 = removeParentheses(relation1);
 	relation2 = removeParentheses(relation2);
 
+	string r1 = "";
+	string r2 = "";
+
 	for (int i = 0; i < querys.size(); i++) {
 
-		id1 = GrabToken(relation1);
-		id1 = trim(id1);
-		id2 = GrabToken(relation2);
-		id2 = trim(id2);
+		r1 = relation1;
+		success1 = querys[i]->Execute(DB, r1);
 
-		if (id1 != "select" || id1 != "project" || id1 != "rename" && i == 0) {
-
-			id1 = "";
-
-		} // end if statement 
-
-		if (id2 != "select" || id2 != "project" || id2 != "rename" && i == 0) {
-
-			id2 = "";
-
-		} // end if statement 
-
-		success1 = querys[i]->Execute(DB, relation1);
-		success2 = querys[i]->Execute(DB, relation2);
-
-		if (success1 && querys[i]->IsQuery(id1)) {
+		if (success1 && !got1) {
 
 			Relation1 = querys[i]->relation;
+			got1 = true;
 
 		} // end if statement
 
-		if (success2 && querys[i]->IsQuery(id2)) {
+		r2 = relation2;
+		success2 = querys[i]->Execute(DB, r2);
+
+		if (success2 && !got2) {
 
 			Relation2 = querys[i]->relation;
+			got2 = true;
 
 		} // end if statement
+
+		if (got1 && got2) break;
 
 	} // end for loop
 
-	newRelation = (DB->setDifference(*(Relation1), *(Relation2)));
-	DB->addRelation(*(newRelation));
-	relation = newRelation;
-	return true;
+	if (Relation1 != NULL && Relation2 != NULL) {
+
+		newRelation = (DB->setDifference(*(Relation1), *(Relation2)));
+		DB->addRelation(*(newRelation));
+		relation = newRelation;
+		return true;
+
+	} // end if statement 
+
+	return false;
 
 } // end Execute(Database*, string)
 
@@ -722,23 +847,26 @@ bool CrossProduct::Execute(Database* DB, string input) {
 	querys.push_back(new NaturalJoin);
 
 	input = ltrim(input);
-	string relation1;
-	string relation2;
+	if (input[input.size() - 1] == ';') {
+		input.pop_back();
+	} // end if statement 
+	string relation1 = "";
+	string relation2 = "";
 	bool r = false;
 	for (int i = 0; i < input.size(); i++) {
 
 		if (input[i] != '*' && r == false) {
 
-			relation1 += input[0];
+			relation1 += input[i];
 
 		}
-		else if (input[i] == '*') {
+		else if (input[i] == '*') {  // NOTE: this won't find the correct + if there is more than one in the query (same for SetDifference, CrossProduct, and NaturalJoin) 
 
 			r = true;
 
 		} // end if else 
 
-		if (r) {
+		if (input[i] != '*' && r) {
 
 			relation2 += input[i];
 
@@ -746,57 +874,64 @@ bool CrossProduct::Execute(Database* DB, string input) {
 
 	} // end for loop 
 
+	relation1 = trim(relation1);
+	relation2 = trim(relation2);
+	if (relation1 == "") return false;
+	if (relation2 == "") return false;
+
+	// This should do what Projection does to evaluate a (expr), except for two (same for SetDifference, CrossProduct, and NaturalJoin) 
 	string id1;
 	string id2;
 	bool success1;
 	bool success2;
-	_Relation* newRelation;
-	_Relation* Relation1 = new _Relation("sudo");
-	_Relation* Relation2 = new _Relation("sudo");
+	_Relation *newRelation;
+	_Relation* Relation1 = NULL;
+	_Relation* Relation2 = NULL;
+	bool got1 = false;
+	bool got2 = false;
 
 	relation1 = removeParentheses(relation1);
 	relation2 = removeParentheses(relation2);
 
+	string r1 = "";
+	string r2 = "";
+
 	for (int i = 0; i < querys.size(); i++) {
 
-		id1 = GrabToken(relation1);
-		id1 = trim(id1);
-		id2 = GrabToken(relation2);
-		id2 = trim(id2);
+		r1 = relation1;
+		success1 = querys[i]->Execute(DB, r1);
 
-		if (id1 != "select" || id1 != "project" || id1 != "rename" && i == 0) {
-
-			id1 = "";
-
-		} // end if statement 
-
-		if (id2 != "select" || id2 != "project" || id2 != "rename" && i == 0) {
-
-			id2 = "";
-
-		} // end if statement 
-
-		success1 = querys[i]->Execute(DB, relation1);
-		success2 = querys[i]->Execute(DB, relation2);
-
-		if (success1 && querys[i]->IsQuery(id1)) {
+		if (success1 && !got1) {
 
 			Relation1 = querys[i]->relation;
+			got1 = true;
 
 		} // end if statement
 
-		if (success2 && querys[i]->IsQuery(id2)) {
+		r2 = relation2;
+		success2 = querys[i]->Execute(DB, r2);
+
+		if (success2 && !got2) {
 
 			Relation2 = querys[i]->relation;
+			got2 = true;
 
 		} // end if statement
+
+		if (got1 && got2) break;
 
 	} // end for loop
 
-	newRelation = (_Relation *)(DB->crossProduct(*(Relation1), *(Relation2)));
-	DB->addRelation(*(newRelation));
-	relation = newRelation;
-	return true;
+	if (Relation1 != NULL && Relation2 != NULL) {
+
+		newRelation = (DB->crossProduct(*(Relation1), *(Relation2)));
+		DB->addRelation(*(newRelation));
+		relation = newRelation;
+		return true;
+
+	} // end if statement 
+
+	return false;
 
 } // end Execute(Database*, string)
 
@@ -820,9 +955,14 @@ bool NaturalJoin::Execute(Database* DB, string input) {
 
 	input = ltrim(input);
 	string relation1 = GrabToken(input);
+	input = ltrim(input);
 	string join = GrabToken(input); // NOTE: it should be able to grab JOIN here
+	input = ltrim(input);
 	string relation2 = GrabToken(input);
 	bool r = false;
+	relation1 = trim(relation1);
+	relation2 = trim(relation2);
+	join = trim(join);
 
 	if (join != "JOIN") {
 
@@ -830,57 +970,105 @@ bool NaturalJoin::Execute(Database* DB, string input) {
 
 	} // end if statement 
 
-	string id1;
-	string id2;
 	bool success1;
 	bool success2;
-	_Relation* newRelation;
-	_Relation* Relation1 = new _Relation("sudo");
-	_Relation* Relation2 = new _Relation("sudo");
+	_Relation *newRelation;
+	_Relation* Relation1 = NULL;
+	_Relation* Relation2 = NULL;
+	bool got1 = false;
+	bool got2 = false;
 
 	relation1 = removeParentheses(relation1);
 	relation2 = removeParentheses(relation2);
 
+	string r1 = "";
+	string r2 = "";
+
 	for (int i = 0; i < querys.size(); i++) {
 
-		id1 = GrabToken(relation1);
-		id1 = trim(id1);
-		id2 = GrabToken(relation2);
-		id2 = trim(id2);
+		r1 = relation1;
+		success1 = querys[i]->Execute(DB, r1);
 
-		if (id1 != "select" || id1 != "project" || id1 != "rename" && i == 0) {
-
-			id1 = "";
-
-		} // end if statement 
-
-		if (id2 != "select" || id2 != "project" || id2 != "rename" && i == 0) {
-
-			id2 = "";
-
-		} // end if statement 
-
-
-		success1 = querys[i]->Execute(DB, relation1);
-		success2 = querys[i]->Execute(DB, relation2);
-
-		if (success1 && querys[i]->IsQuery(id1)) {
+		if (success1 && !got1) {
 
 			Relation1 = querys[i]->relation;
+			got1 = true;
 
 		} // end if statement
 
-		if (success2 && querys[i]->IsQuery(id2)) {
+		r2 = relation2;
+		success2 = querys[i]->Execute(DB, r2);
+
+		if (success2 && !got2) {
 
 			Relation2 = querys[i]->relation;
+			got2 = true;
 
 		} // end if statement
+
+		if (got1 && got2) break;
 
 	} // end for loop
 
-	newRelation = (_Relation *)(DB->naturalJoin(*(Relation1), *(Relation2)));
-	DB->addRelation(*(newRelation));
-	relation = newRelation;
+	if (Relation1 != NULL && Relation2 != NULL) {
+
+		newRelation = (DB->naturalJoin(*(Relation1), *(Relation2)));
+		DB->addRelation(*(newRelation));
+		relation = newRelation;
+		return true;
+
+	} // end if statement 
+
+	return false;
 
 } // end Execute(Database*, string)
 
+int main() {
+
+	Database DB;
+	/*
+	vector<_Column> Columns;
+	Columns.push_back(_Column("ID", true, _Type::INT));
+	Columns.push_back(_Column("Name", false, _Type::VARCHAR));
+	Columns.push_back(_Column("Pet", false, _Type::VARCHAR));
+	Columns.push_back(_Column("Age", false, _Type::INT));
+	DB.createTable("animals", Columns);
+	*/
+	Parser P(&DB);
+
+
+	P.Execute("CREATE TABLE animals (ID INTEGER, Name VARCHAR(20), PET VARCHAR(20), Age INTEGER)");
+	P.Execute("INSERT INTO animals VALUES FROM (\"Joe helloasdf\", \"cat\", 4);");
+	P.Execute("INSERT INTO animals VALUES FROM (\"hello\", \"dog\", 234);");
+	P.Execute("WRITE animals");
+	P.Execute("CLOSE animals");
+	DB.getRelation("animals")->Print();
+	//	P.Execute("name_test <- animals;"); 
+	//	P.Execute("project_test <- project (Name, PET) animals;"); 
+	// P.Execute("rename_test <- rename (v_ID, v_Name, v_Pet, v_age) animals;"); 
+	// P.Execute("SHOW project_test;"); 
+	P.Execute("CREATE TABLE friends (fname VARCHAR(20), lname VARCHAR(20), personality VARCHAR(20), value INTEGER) PRIMARY KEY (fname, lname);");
+	P.Execute("INSERT INTO friends VALUES FROM (\"X\", \"N/A\", \"Awesome!\", 100);");
+	P.Execute("INSERT INTO friends VALUES FROM (\"Smith\", \"Smith\", \"Annoying\", 5);");
+	P.Execute("INSERT INTO friends VALUES FROM (\"Algebra\", \"Homework\", \"Boring\", -100);");
+	P.Execute("CREATE TABLE enemies (fname VARCHAR(20), lname VARCHAR(20), personality VARCHAR(20), value INTEGER) PRIMARY KEY (fname, lname);");
+	P.Execute("INSERT INTO enemies VALUES FROM (\"X\", \"N/A\", \"Awesome!\", 100);");
+	P.Execute("INSERT INTO enemies VALUES FROM (\"The\", \"Penguin\", \"Weird\", 100);");
+	P.Execute("INSERT INTO enemies VALUES FROM (\"Joker\", \"N/A\", \"Weird\", 150);");
+	//	P.Execute("good_and_bad_guys <- friends + enemies;"); 
+	P.Execute("CREATE TABLE baseball_players (fname VARCHAR(20), lname VARCHAR(30), team VARCHAR(20), homeruns INTEGER, salary INTEGER) PRIMARY KEY (fname, lname);");
+	P.Execute("INSERT INTO baseball_players VALUES FROM (\"Joe\", \"Swatter\", \"Pirates\", 40, 1000000);");
+	P.Execute("INSERT INTO baseball_players VALUES FROM (\"Sarah\", \"Batter\", \"Dinosaurs\", 100, 5000000);");
+	P.Execute("INSERT INTO baseball_players VALUES FROM (\"Snoopy\", \"Slinger\", \"Pirates\", 3, 200000);");
+	P.Execute("INSERT INTO baseball_players VALUES FROM (\"Donald\", \"Runner\", \"Dinosaurs\", 89, 200000);");
+	P.Execute("INSERT INTO baseball_players VALUES FROM (\"Alexander\", \"Smith\", \"Pirates\", 2, 150000);");
+//	P.Execute("high_hitters <- select (homeruns >= 40) baseball_players;");
+//	P.Execute("diff_test <- friends - enemies;");
+//	P.Execute("high_hit_pirates <- select (team == \"Pirates\") (select (homeruns >= 40) baseball_players);");
+	P.Execute("high_hit_players <- (select (team == \"Priates\") baseball_players) * (select (homeruns >= 40) baseball_players);"); 
+
+
+
+	P.Execute("EXIT");
+
+} // end main 

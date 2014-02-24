@@ -23,6 +23,7 @@ void CustomerManagementMain();
 void PizzaManagementMain();
 void FinancesManagementMain();
 
+/*
 int main()
 {
 	system("CLS");
@@ -63,7 +64,7 @@ int main()
 		}
 	}
 }
-
+*/ 
 void CustomerManagementMain()
 {
 	for (;;)
