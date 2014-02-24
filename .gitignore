@@ -26,6 +26,8 @@ build/
 *_p.c
 *.ilk
 *.meta
+*.suo
+*.sdf
 *.obj
 *.pch
 *.pdb
@@ -50,6 +52,8 @@ build/
 ipch/
 *.aps
 *.ncb
+*.suo
+*.sdf
 *.opensdf
 *.sdf
 *.cachefile
@@ -58,6 +62,8 @@ ipch/
 *.psess
 *.vsp
 *.vspx
+*.suo
+*.sdf
 
 # Guidance Automation Toolkit
 *.gpState
