@@ -1017,17 +1017,17 @@ bool NaturalJoin::Execute(Database* DB, string input) {
 
 } // end Execute(Database*, string)
 
-int main() {
+/*int main() {
 
 	Database DB;
-	/*
+	
 	vector<_Column> Columns;
 	Columns.push_back(_Column("ID", true, _Type::INT));
 	Columns.push_back(_Column("Name", false, _Type::VARCHAR));
 	Columns.push_back(_Column("Pet", false, _Type::VARCHAR));
 	Columns.push_back(_Column("Age", false, _Type::INT));
 	DB.createTable("animals", Columns);
-	*/
+	
 	Parser P(&DB);
 
 
@@ -1062,4 +1062,4 @@ int main() {
 
 	P.Execute("EXIT");
 
-} // end main 
+} // end main */

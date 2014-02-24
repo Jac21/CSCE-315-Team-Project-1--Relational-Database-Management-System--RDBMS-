@@ -23,7 +23,7 @@ void CustomerManagementMain();
 void PizzaManagementMain();
 void FinancesManagementMain();
 
-/*
+
 int main()
 {
 	system("CLS");
@@ -64,7 +64,7 @@ int main()
 		}
 	}
 }
-*/ 
+
 void CustomerManagementMain()
 {
 	for (;;)
@@ -73,8 +73,9 @@ void CustomerManagementMain()
 		cout << "------------" << endl;
 		cout << "1) Add Customer" << endl;
 		cout << "2) Edit Customer" << endl;
-		cout << "3) Remove Customer" << endl;
-		cout << "4) Quit" << endl;
+		cout << "3) Update Customer" << endl;
+		cout << "4) Remove Customer" << endl;
+		cout << "5) Quit" << endl;
 		cout << "------------" << endl;
 		cout << "CHOICE:";
 
@@ -93,6 +94,8 @@ void CustomerManagementMain()
 			//FinancesManagementMain();
 			break;
 		case '4':
+			break;
+		case '5':
 			return;
 			break;
 		default:
@@ -110,8 +113,9 @@ void PizzaManagementMain()
 		cout << "------------" << endl;
 		cout << "1) Place Order" << endl;
 		cout << "2) Edit Order" << endl;
-		cout << "3) Remove Order" << endl;
-		cout << "4) Quit" << endl;
+		cout << "3) Update Order" << endl;
+		cout << "4) Remove Order" << endl;
+		cout << "5) Quit" << endl;
 		cout << "------------" << endl;
 		cout << "CHOICE:";
 
@@ -130,6 +134,8 @@ void PizzaManagementMain()
 			//FinancesManagementMain();
 			break;
 		case '4':
+			break;
+		case '5':
 			return;
 			break;
 		default:
@@ -148,8 +154,9 @@ void FinancesManagementMain()
 
 		cout << "1) Add Transaction" << endl;
 		cout << "2) Edit Transaction" << endl;
-		cout << "3) Remove Transaction" << endl;
-		cout << "4) Quit" << endl;
+		cout << "3) Update Transaction" << endl;
+		cout << "4) Remove Transaction" << endl;
+		cout << "5) Quit" << endl;
 		cout << "------------" << endl;
 		cout << "CHOICE:";
 
@@ -168,6 +175,8 @@ void FinancesManagementMain()
 			//FinancesManagementMain();
 			break;
 		case '4':
+			break;
+		case '5':
 			return;
 			break;
 		default:
