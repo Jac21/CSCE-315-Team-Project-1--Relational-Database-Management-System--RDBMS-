@@ -51,7 +51,53 @@ _Relation* Database::projection(vector<string> attributes, _Relation r) {
 } // end projection(vector<string>, Relation&)
 
 _Relation* Database::setDifference(_Relation& a, _Relation& b) {
-	vector<_Column> aAttributes;
+	_Relation *newRelation = new _Relation("sudo");
+	for (int i = 0; i < a.Columns.size(); ++i) {
+		newRelation->AddColumn(_Column(a.Columns[i].Name, a.Columns[i].AutoIncrement, a.Columns[i].Type));
+	}
+	if (a.Columns.size() != b.Columns.size()) {
+		cerr << "Error: the two relations are not difference compatible.\n";
+		return NULL;
+	}
+	for (int i = 0; i < a.Columns.size(); ++i) {
+		if (a.Columns[i].Type != b.Columns[i].Type) {
+			cerr << "Error: the two relations are not difference compatible.\n";
+			return NULL;
+		}
+	}
+	for (int i = 0; i < a.Columns[0].Rows.size(); ++i) {
+		bool okAdd = true;
+		for (int j = 0; j < b.Columns[0].Rows.size(); ++j) {
+			int z = 0;
+			for (int k = 0; k < a.Columns.size(); ++k) {
+				++z;
+				if (a.Columns[k].Type == _Type::INT) {
+					int *p = (int*)a.Columns[k].Rows[i].Data;
+					int *p2 = (int*)b.Columns[k].Rows[j].Data;
+					if (*p != *p2) {
+						break;
+					}
+				}
+				else {
+					string *p = (string*)a.Columns[k].Rows[i].Data;
+					string *p2 = (string*)b.Columns[k].Rows[j].Data;
+					if (*p != *p2) {
+						break;
+					}
+				}
+			}
+			if (z == a.Columns.size()) {
+				okAdd = false;
+			}
+		}
+		if (okAdd == true) {
+			newRelation->AddRow(a.GetRow(i));
+		}
+	}
+	return newRelation;
+}
+
+/*	vector<_Column> aAttributes;
 	vector<_Column> bAttributes;
 	for (int i = 0; i < a.Columns.size(); ++i)
 		aAttributes.push_back(a.Columns[i]);
@@ -68,7 +114,7 @@ _Relation* Database::setDifference(_Relation& a, _Relation& b) {
 
 	for (int i = 0; i < aAttributes.size(); i++) {
 
-		if (aAttributes[i].Rows[i].Type != bAttributes[i].Rows[i].Type) {
+		if (aAttributes[i].Type != bAttributes[i].Type) {
 
 			cerr << "Error, these two relations are not difference compatible.";
 
@@ -110,11 +156,11 @@ _Relation* Database::setDifference(_Relation& a, _Relation& b) {
 			okAdd = false;
 
 		} // end for loop with j
-
+		
 		return newRelation;
 
 	} // end setDifference(Relation&, Relation&)
-}
+}*/
 
 _Relation* Database::renaming(vector<string> renames, _Relation r) {
 	vector<_Column> rAttributes;
