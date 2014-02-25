@@ -222,20 +222,20 @@ vector<string> GrabCondition(string& S) {
 
 		if (S[i] != '(' && S[i] != ')') {
 
-			if (S[i] != ' ') {
+			if (S[i] != ' ' && S[i] != '"') {
 
 				Token += S[i];
 
-			}
-			else {
+			} else {
 
-				AllTokens.push_back(trim(Token));
-				Token = "";
+				if (Token != "") {
+					AllTokens.push_back(trim(Token));
+					Token = "";
+				} // end if statement 
 
 			} // end if else statement 
 
-		}
-		else {
+		} else {
 
 			if (Token != "") {
 				AllTokens.push_back(trim(Token));
@@ -268,7 +268,7 @@ string removeParentheses(string S) {
 	string newstring = "";
 	if (S[0] == '(' && S[S.size() - 1] == ')') {
 
-		for (int i = 1; i < S.size() - 2; i++) {
+		for (int i = 1; i < S.size() - 1; i++) {
 
 			newstring += S[i];
 
@@ -298,7 +298,7 @@ bool RelationName::Execute(Database* DB, string input) {
 	string isName = GrabToken(input);
 	ltrim(input);
 
-	if (isName[isName.size() - 1] == ';') {
+	if (isName[(isName.size() - 1)] == ';') {
 		isName.pop_back();
 		test.pop_back();
 	} // end if statement 
@@ -664,6 +664,8 @@ bool SetUnion::Execute(Database* DB, string input) {
 
 	relation1 = trim(relation1);
 	relation2 = trim(relation2);
+	if (relation1 == "") return false;
+	if (relation2 == "") return false; 
 
 	// This should do what Projection does to evaluate a (expr), except for two (same for SetDifference, CrossProduct, and NaturalJoin) 
 	bool success1;
@@ -767,6 +769,8 @@ bool SetDifference::Execute(Database* DB, string input) {
 
 	relation1 = trim(relation1);
 	relation2 = trim(relation2);
+	if (relation1 == "") return false;
+	if (relation2 == "") return false;
 
 	// This should do what Projection does to evaluate a (expr), except for two (same for SetDifference, CrossProduct, and NaturalJoin) 
 	string id1;
@@ -872,6 +876,8 @@ bool CrossProduct::Execute(Database* DB, string input) {
 
 	relation1 = trim(relation1);
 	relation2 = trim(relation2);
+	if (relation1 == "") return false;
+	if (relation2 == "") return false;
 
 	// This should do what Projection does to evaluate a (expr), except for two (same for SetDifference, CrossProduct, and NaturalJoin) 
 	string id1;
@@ -1017,17 +1023,17 @@ bool NaturalJoin::Execute(Database* DB, string input) {
 
 } // end Execute(Database*, string)
 
-/*int main() {
+int main() {
 
 	Database DB;
-	
+	/*
 	vector<_Column> Columns;
 	Columns.push_back(_Column("ID", true, _Type::INT));
 	Columns.push_back(_Column("Name", false, _Type::VARCHAR));
 	Columns.push_back(_Column("Pet", false, _Type::VARCHAR));
 	Columns.push_back(_Column("Age", false, _Type::INT));
 	DB.createTable("animals", Columns);
-	
+	*/
 	Parser P(&DB);
 
 
@@ -1056,10 +1062,13 @@ bool NaturalJoin::Execute(Database* DB, string input) {
 	P.Execute("INSERT INTO baseball_players VALUES FROM (\"Snoopy\", \"Slinger\", \"Pirates\", 3, 200000);");
 	P.Execute("INSERT INTO baseball_players VALUES FROM (\"Donald\", \"Runner\", \"Dinosaurs\", 89, 200000);");
 	P.Execute("INSERT INTO baseball_players VALUES FROM (\"Alexander\", \"Smith\", \"Pirates\", 2, 150000);");
-	P.Execute("high_hitters <- select (homeruns >= 40) baseball_players;");
+//	P.Execute("high_hitters <- select (homeruns >= 40) baseball_players;");
+//	P.Execute("diff_test <- friends - enemies;");
+//	P.Execute("high_hit_pirates <- select (team == \"Pirates\") (select (homeruns >= 40) baseball_players);");
+	P.Execute("high_hit_players <- (select (team == \"Priates\") baseball_players) * (select (homeruns >= 40) baseball_players);"); 
 
 
 
 	P.Execute("EXIT");
 
-} // end main */
+} // end main 

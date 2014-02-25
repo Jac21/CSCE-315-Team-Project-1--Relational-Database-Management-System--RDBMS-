@@ -51,69 +51,50 @@ _Relation* Database::projection(vector<string> attributes, _Relation r) {
 } // end projection(vector<string>, Relation&)
 
 _Relation* Database::setDifference(_Relation& a, _Relation& b) {
-	vector<_Column> aAttributes;
-	vector<_Column> bAttributes;
-	for (int i = 0; i < a.Columns.size(); ++i)
-		aAttributes.push_back(a.Columns[i]);
-	for (int i = 0; i < b.Columns.size(); ++i)
-		bAttributes.push_back(b.Columns[i]);
-	_Relation* newRelation = new _Relation("sudo");
-	bool okAdd = false;
-
-	if (aAttributes.size() != bAttributes.size()) {
-
-		cerr << "Error, these two relations are not difference compatible.";
-
-	} // end if statement 
-
-	for (int i = 0; i < aAttributes.size(); i++) {
-
-		if (aAttributes[i].Rows[i].Type != bAttributes[i].Rows[i].Type) {
-
-			cerr << "Error, these two relations are not difference compatible.";
-
-		} // end if else statement 
-
-		newRelation->AddColumn(aAttributes[i]);
-
-	} // end for loop with i
-
-	//vector<Row> aRows = a.getRowList();
-	//vector<Row> bRows = b.getRowList();
-
-	for (int j = 0; j < aAttributes[0].Rows.size(); j++) {
-
-		for (int k = 0; k < bAttributes[0].Rows.size(); k++) {
-			for (int z = 0; z < aAttributes.size(); ++z) {
-				if (aAttributes[z].Rows[j].Data != bAttributes[z].Rows[j].Data) {
-
-					okAdd = true;
-
+	_Relation *newRelation = new _Relation("sudo");
+	for (int i = 0; i < a.Columns.size(); ++i) {
+		newRelation->AddColumn(_Column(a.Columns[i].Name, a.Columns[i].AutoIncrement, a.Columns[i].Type));
+	}
+	if (a.Columns.size() != b.Columns.size()) {
+		cerr << "Error: the two relations are not difference compatible.\n";
+		return NULL;
+	}
+	for (int i = 0; i < a.Columns.size(); ++i) {
+		if (a.Columns[i].Type != b.Columns[i].Type) {
+			cerr << "Error: the two relations are not difference compatible.\n";
+			return NULL;
+		}
+	}
+	for (int i = 0; i < a.Columns[0].Rows.size(); ++i) {
+		bool okAdd = true;
+		for (int j = 0; j < b.Columns[0].Rows.size(); ++j) {
+			int z = 0;
+			for (int k = 0; k < a.Columns.size(); ++k) {
+				++z;
+				if (a.Columns[k].Type == _Type::INT) {
+					int *p = (int*)a.Columns[k].Rows[i].Data;
+					int *p2 = (int*)b.Columns[k].Rows[j].Data;
+					if (*p != *p2) {
+						break;
+					}
 				}
 				else {
-
-					okAdd = false;
-					break;
-
-				} // end if else statement
+					string *p = (string*)a.Columns[k].Rows[i].Data;
+					string *p2 = (string*)b.Columns[k].Rows[j].Data;
+					if (*p != *p2) {
+						break;
+					}
+				}
 			}
-		} // end for loop with k 
-
+			if (z == a.Columns.size()) {
+				okAdd = false;
+			}
+		}
 		if (okAdd == true) {
-			vector<_Data> dt;
-			for (int i = 0; i < aAttributes.size(); ++i) {
-				dt.push_back(aAttributes[i].Get_Data(j));
-				newRelation->AddRow(dt);
-
-			} // end if statement 
-
-			okAdd = false;
-
-		} // end for loop with j
-
-		return newRelation;
-
-	} // end setDifference(Relation&, Relation&)
+			newRelation->AddRow(a.GetRow(i));
+		}
+	}
+	return newRelation;
 }
 
 _Relation* Database::renaming(vector<string> renames, _Relation r) {
