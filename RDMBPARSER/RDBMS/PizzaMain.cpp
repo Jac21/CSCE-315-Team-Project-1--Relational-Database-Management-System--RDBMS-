@@ -37,7 +37,7 @@ void RemoveCustomer();
 void Initialize()
 {
 	PizzaParser.Execute("CREATE TABLE customer (id INTEGER, name VARCHAR(64),phone VARCHAR(64) address VARCHAR(64));");
-	PizzaParser.Execute("CREATE TABLE pizza (id INTEGER, toppingfk INTEGER, crustfk INTEGER, cheesefk INTEGER);");
+	PizzaParser.Execute("CREATE TABLE pizza (id INTEGER,name VARCHAR(64), toppingfk INTEGER, crustfk INTEGER, cheesefk INTEGER);");
 
 	PizzaParser.Execute("CREATE TABLE crust (id INTEGER, name VARCHAR(64), cost INTEGER, calories INTEGER, gluten INTEGER, saturatedfat INTEGER);");
 	PizzaParser.Execute("CREATE TABLE topping (id INTEGER, name VARCHAR(64), cost INTEGER, calories INTEGER, vegetarian INTEGER, saturatedfat INTEGER);");
@@ -266,12 +266,16 @@ void PizzaManagementMain()
 void AddPizza()
 {
 	//"CREATE TABLE pizza (id INTEGER, toppingfk INTEGER, crustfk INTEGER, cheesefk INTEGER);"
+	string Name;
 	string ToppingFK;
 	string CrustFK;
 	string CheeseFK;
 	cout << "\n====================\n";
 	cout << "===ADDING PIZZA==\n";
 	cout << "====================\n";
+	cout << "\n What is the name of the pizza?\n";
+	cout << "\nInsert Pizza Name: ";
+	getline(cin, Name);
 	PizzaDB.show("topping");
 	cout << "\nInsert Topping ID: ";
 	getline(cin, ToppingFK);
@@ -282,7 +286,7 @@ void AddPizza()
 	cout << "\nInsert Cheese ID: ";
 	getline(cin, CheeseFK);
 
-	PizzaParser.Execute("INSERT INTO pizza VALUES FROM (" + ToppingFK + "," + CrustFK + "," + CheeseFK + ")");
+	PizzaParser.Execute("INSERT INTO pizza VALUES FROM (\"" + Name + "\", " + ToppingFK + "," + CrustFK + "," + CheeseFK + ")");
 	cout << "\n Inserted" + ToppingFK + CrustFK +  CheeseFK + "\n";
 }
 
