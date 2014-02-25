@@ -421,8 +421,14 @@ bool Delete::Execute(Database* DB, string Input)
 
 	for (int i = 0; i < Result.Columns[0].Rows.size(); i++)
 	{
-		Result.RemoveRow(i);
-
+		for (int y = 0; y < Original->Columns[0].Rows.size(); y++)
+		{
+			if (*(int*)Result.Columns[0].Rows[i].Data == *(int*)Original->Columns[0].Rows[y].Data) //TOTAL HACK
+			{
+				Original->RemoveRow(y);
+				Result.RemoveRow(i);
+			}
+		}
 	}
 	return true;
 }

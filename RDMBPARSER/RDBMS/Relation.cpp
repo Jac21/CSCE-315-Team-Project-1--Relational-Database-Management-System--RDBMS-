@@ -35,6 +35,7 @@ ostream& operator<<(ostream& out, const _Data& d){
 	return out;
 }
 
+
 /* -- COLUMN CLTestRow --
    -- CONSTRUCTORS -- */
 _Column::_Column() {}

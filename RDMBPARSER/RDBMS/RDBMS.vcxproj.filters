@@ -53,9 +53,6 @@
     <ClCompile Include="Relation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TESTS.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
