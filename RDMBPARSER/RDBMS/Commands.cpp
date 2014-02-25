@@ -132,13 +132,8 @@ bool Show::Execute(Database *DB, string Input)
 
 	if (Relation != NULL)
 	{
-		string Token;
-		while (Input.length() != 0)
-		{
-			Token += GrabChar(Input);
-			Relation->Print();
-			return true;
-		}
+		Relation->Print();
+		return true;
 	}
 	return false;
 }
@@ -383,6 +378,51 @@ bool Update::Execute(Database* DB, string Input)
 				}
 			}
 		}
+	}
+	return true;
+}
+
+Delete::Delete()
+{
+	Identifer = "DELETEFROM";
+}
+
+bool Delete::IsCommand(string Input)
+{
+	if (Input == Identifer)
+		return true;
+}
+
+bool Delete::Execute(Database* DB, string Input)
+{
+	Input = ltrim(Input);
+	string RelationName = GrabToken(Input); //Expecting RelationName
+
+	Input = ltrim(Input);
+
+	if (GrabToken(Input) != "WHERE")
+		return false;
+
+	//Then do condition in this example we are expecting atribute = X
+	Input = ltrim(Input);
+	string AttributeNameWhere = GrabToken(Input);
+	Input = ltrim(Input);
+	string condition = GrabToken(Input);
+	Input = ltrim(Input);
+	string Argument = GrabToken(Input);
+	Argument = rtrim(Argument);
+	if (Argument[Argument.size() - 1] == ';')
+		Argument.pop_back();
+
+
+	Comparison asdf(AttributeNameWhere, _Data(Argument), Comparison::EQUALS);
+	_Relation* Original = DB->getRelation(RelationName);
+	_Relation Result = *(asdf.evaluate(DB->getRelation(RelationName))); 
+
+	for (int i = 0; i < Result.Columns[0].Rows.size(); i++)
+	{
+		Result.RemoveRow(i);
+
 	}
 	return true;
 }

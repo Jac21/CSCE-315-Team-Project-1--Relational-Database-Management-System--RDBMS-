@@ -140,6 +140,7 @@ public:
 		Commands.push_back(new Open());
 		Commands.push_back(new Write());
 		Commands.push_back(new Exiter());
+		Commands.push_back(new Delete());
 		Querys.push_back(new RelationName);
 		Querys.push_back(new Selection);
 		Querys.push_back(new Projection);

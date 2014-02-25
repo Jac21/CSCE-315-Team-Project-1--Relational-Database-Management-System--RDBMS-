@@ -21,6 +21,7 @@ public:
 	bool Write();
 	bool Exiter();
 	bool Update();
+	bool Delete();
 	string Identifer;
 	bool virtual IsCommand(string Input)
 	{
@@ -86,6 +87,14 @@ class Update : public Command
 {
 public:
 	Update();
+	bool IsCommand(string Input);
+	bool Execute(Database* DB, string Input);
+};
+
+class Delete : public Command
+{
+public:
+	Delete();
 	bool IsCommand(string Input);
 	bool Execute(Database* DB, string Input);
 };
